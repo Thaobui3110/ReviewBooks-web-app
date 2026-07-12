@@ -19,7 +19,7 @@ function validateBook(data, validCategories, validAuthors) {
   // validCategories, validAuthors: mảng { id, name } lấy từ categoryService/authorService.listAll()
   const errors = [];
   const title = clean(data.title);
-  const cover_image = clean(data.cover_image) || '/images/books/placeholder.png';
+  const cover_image = clean(data.cover_image) || '/images/books/placeholder.jpg';
   const description = clean(data.description);
   const review_content = clean(data.review_content);
   const language = clean(data.language) || null;
@@ -68,7 +68,7 @@ function validateBook(data, validCategories, validAuthors) {
 function validateAuthor(data) {
   const errors = [];
   const name = clean(data.name);
-  const avatar = clean(data.avatar) || '/images/authors/default-author.png';
+  const avatar = clean(data.avatar) || '/images/authors/default-author.jpg';
   const bio = clean(data.bio);
 
   const nameError = validateRequiredText(name, 'Tên tác giả', 2, 150);

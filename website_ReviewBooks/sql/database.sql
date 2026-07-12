@@ -26,7 +26,7 @@ CREATE TABLE categories (
 CREATE TABLE authors (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(150) NOT NULL UNIQUE,
-  avatar VARCHAR(255) DEFAULT '/images/authors/default-author.png',
+  avatar VARCHAR(255) DEFAULT '/images/authors/default-author.jpg',
   bio TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -36,7 +36,7 @@ CREATE TABLE books (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(200) NOT NULL,
   author_id INT NOT NULL,
-  cover_image VARCHAR(255) DEFAULT '/images/books/placeholder.png',
+  cover_image VARCHAR(255) DEFAULT '/images/books/placeholder.jpg',
   description TEXT,
   review_content TEXT,
   language VARCHAR(80) DEFAULT NULL,
@@ -132,13 +132,13 @@ INSERT INTO authors (name, bio) VALUES
 ('Roald Dahl', 'Nhà văn người Anh gốc Wales, nổi tiếng với các tác phẩm văn học thiếu nhi giàu trí tưởng tượng.'); -- 27
 
 -- Ảnh đại diện thật cho các tác giả đã có sẵn file trong public/images/authors/
--- (các tác giả còn lại dùng DEFAULT '/images/authors/default-author.png' của cột avatar).
+-- (các tác giả còn lại dùng DEFAULT '/images/authors/default-author.jpg' của cột avatar).
 UPDATE authors SET avatar = '/images/authors/Nguyen_Nhat_Anh.jpg' WHERE name = 'Nguyễn Nhật Ánh';
 UPDATE authors SET avatar = '/images/authors/paulo_coelho.jpg' WHERE name = 'Paulo Coelho';
-UPDATE authors SET avatar = '/images/authors/dale_carnegie.png' WHERE name = 'Dale Carnegie';
+UPDATE authors SET avatar = '/images/authors/dale_carnegie.jpg' WHERE name = 'Dale Carnegie';
 UPDATE authors SET avatar = '/images/authors/james_clear.jpg' WHERE name = 'James Clear';
-UPDATE authors SET avatar = '/images/authors/Rosie_Nguyen.png' WHERE name = 'Rosie Nguyễn';
-UPDATE authors SET avatar = '/images/authors/Yuval_Noah_Harari.png' WHERE name = 'Yuval Noah Harari';
+UPDATE authors SET avatar = '/images/authors/Rosie_Nguyen.jpg' WHERE name = 'Rosie Nguyễn';
+UPDATE authors SET avatar = '/images/authors/Yuval_Noah_Harari.jpg' WHERE name = 'Yuval Noah Harari';
 
 -- Mật khẩu đã hash bằng utils/password.js::hashPassword (PBKDF2, format "salt:hash").
 -- Mật khẩu gốc: admin -> admin123, tất cả các tài khoản user -> user123.
@@ -166,45 +166,45 @@ INSERT INTO users (username, email, password, role, last_seen_at) VALUES
 -- language = ngôn ngữ gốc của tác phẩm; publish_year = năm xuất bản lần đầu (không phải năm bản dịch tiếng Việt)
 -- author_id tham chiếu tới bảng authors ở trên (1=Nguyễn Nhật Ánh, 6=Yuval Noah Harari, 8=Stephen Hawking dùng chung cho 2 sách)
 INSERT INTO books (title, author_id, cover_image, description, review_content, language, publish_year, page_count, publisher, translator) VALUES
-('Tôi Thấy Hoa Vàng Trên Cỏ Xanh', 1, '/images/books/placeholder.png', 'Một câu chuyện trong trẻo về tuổi thơ, tình thân và những rung động đầu đời.', 'Tác phẩm có giọng kể nhẹ, giàu hình ảnh và giàu cảm xúc. Điểm mạnh là cách tác giả tái hiện thế giới trẻ thơ vừa hồn nhiên vừa nhiều tổn thương.', 'Tiếng Việt', 2010, 378, 'NXB Trẻ', NULL),
-('Nhà Giả Kim', 2, '/images/books/placeholder.png', 'Hành trình đi tìm kho báu cũng là hành trình nhận ra ước mơ và bản thân.', 'Cuốn sách dễ đọc, giàu tính biểu tượng. Phù hợp với người đọc thích những thông điệp ngắn gọn về ước mơ và lựa chọn cá nhân.', 'Tiếng Bồ Đào Nha', 1988, 227, 'NXB Hội Nhà Văn', 'Lê Chu Cầu'),
-('Đắc Nhân Tâm', 3, '/images/books/placeholder.png', 'Sách kinh điển về giao tiếp, ứng xử và xây dựng quan hệ.', 'Nội dung thực tế, nhiều nguyên tắc dễ áp dụng. Khi đọc cần chọn lọc để tránh biến giao tiếp thành kỹ thuật máy móc.', 'Tiếng Anh', 1936, 320, 'NXB Tổng hợp TP.HCM', 'Nguyễn Hiến Lê'),
-('Atomic Habits', 4, '/images/books/placeholder.png', 'Hệ thống xây dựng thói quen nhỏ nhưng tạo thay đổi lớn theo thời gian.', 'Sách có cấu trúc rõ, ví dụ dễ hiểu. Giá trị chính nằm ở cách biến mục tiêu lớn thành hệ thống hành động nhỏ và đều đặn.', 'Tiếng Anh', 2018, 320, 'NXB Thế Giới', 'Nguyễn Minh Trang'),
-('Tuổi Trẻ Đáng Giá Bao Nhiêu', 5, '/images/books/placeholder.png', 'Những suy ngẫm về học tập, trải nghiệm, đọc sách và trưởng thành.', 'Phù hợp với học sinh, sinh viên đang tìm định hướng. Văn phong gần gũi, dễ tiếp cận, thiên về động lực cá nhân.', 'Tiếng Việt', 2016, 260, 'NXB Hội Nhà Văn', NULL),
-('Sapiens', 6, '/images/books/placeholder.png', 'Lược sử loài người qua các giai đoạn nhận thức, nông nghiệp, xã hội và khoa học.', 'Một cuốn sách giàu góc nhìn tổng hợp. Nên đọc với tinh thần phản biện vì sách đưa ra nhiều diễn giải rộng về lịch sử và xã hội.', 'Tiếng Hebrew', 2011, 443, 'NXB Tri Thức', 'Nguyễn Thủy Chung'),
-('Dế Mèn Phiêu Lưu Ký', 7, '/images/books/placeholder.png', 'Tác phẩm thiếu nhi kinh điển về hành trình trưởng thành của Dế Mèn.', 'Truyện có tính phiêu lưu, giàu bài học về trách nhiệm, lòng dũng cảm và sự khiêm tốn.', 'Tiếng Việt', 1941, 155, 'NXB Kim Đồng', NULL),
-('Lược Sử Thời Gian', 8, '/images/books/placeholder.png', 'Giới thiệu các ý tưởng lớn về vũ trụ học cho độc giả phổ thông.', 'Một cuốn sách kích thích tò mò khoa học, tuy có một số phần cần đọc chậm để nắm ý tưởng.', 'Tiếng Anh', 1988, 256, 'NXB Trẻ', 'Cao Chi, Phạm Văn Thiều'),
-('Không Gia Đình', 9, '/images/books/placeholder.png', 'Câu chuyện cảm động về cậu bé Rémi trên hành trình mưu sinh.', 'Tác phẩm giàu cảm xúc, đề cao lòng nhân ái và nghị lực sống.', 'Tiếng Pháp', 1878, 559, 'NXB Văn Học', 'Huỳnh Lý'),
-('Khởi Nghiệp Tinh Gọn', 10, '/images/books/placeholder.png', 'Phương pháp xây dựng sản phẩm dựa trên thử nghiệm, đo lường và học hỏi.', 'Nội dung phù hợp với người quan tâm startup và phát triển sản phẩm.', 'Tiếng Anh', 2011, 320, 'NXB Lao Động Xã Hội', 'Đặng Trần Phương'),
-('Clean Code', 11, '/images/books/placeholder.png', 'Các nguyên tắc viết mã rõ ràng, dễ bảo trì.', 'Sách hữu ích cho lập trình viên muốn cải thiện chất lượng code.', 'Tiếng Anh', 2008, 464, 'NXB Khoa Học Kỹ Thuật', 'Nguyễn Thành Nam'),
-('Việt Nam Sử Lược', 12, '/images/books/placeholder.png', 'Tổng thuật lịch sử Việt Nam theo lối viết cổ điển.', 'Nên đọc như một tài liệu tham khảo lịch sử, kết hợp với nguồn hiện đại để đối chiếu.', 'Tiếng Việt', 1920, 588, 'NXB Văn Học', NULL),
-('Chí Phèo', 13, '/images/books/placeholder.png', 'Bi kịch của một người nông dân bị tha hóa bởi xã hội thực dân phong kiến.', 'Ngòi bút hiện thực sắc sảo, khắc họa nỗi đau con người bị cự tuyệt quyền làm người.', 'Tiếng Việt', 1941, 220, 'NXB Văn Học', NULL),
-('Số Đỏ', 14, '/images/books/placeholder.png', 'Bức tranh trào phúng về xã hội thượng lưu rởm đời thời Pháp thuộc.', 'Giọng văn châm biếm sắc bén, nhân vật Xuân Tóc Đỏ trở thành biểu tượng văn học.', 'Tiếng Việt', 1936, 262, 'NXB Văn Học', NULL),
-('Mắt Biếc', 1, '/images/books/placeholder.png', 'Mối tình đơn phương dai dẳng của Ngạn dành cho Hà Lan từ thuở nhỏ đến khi trưởng thành.', 'Câu chuyện nhẹ nhàng nhưng day dứt, khắc họa tình yêu thuần khiết và sự tiếc nuối.', 'Tiếng Việt', 1990, 300, 'NXB Trẻ', NULL),
-('Hoàng Tử Bé', 15, '/images/books/placeholder.png', 'Cuộc gặp gỡ giữa phi công lạc giữa sa mạc và vị hoàng tử đến từ hành tinh khác.', 'Tác phẩm tưởng viết cho trẻ em nhưng chứa nhiều triết lý sâu sắc về cuộc sống.', 'Tiếng Pháp', 1943, 96, 'NXB Kim Đồng', 'Vĩnh Lạc'),
-('1984', 16, '/images/books/placeholder.png', 'Xã hội toàn trị nơi mọi hành vi, tư tưởng đều bị giám sát bởi Big Brother.', 'Tác phẩm kinh điển về chủ đề tự do cá nhân, vẫn còn tính thời sự cao.', 'Tiếng Anh', 1949, 328, 'NXB Hội Nhà Văn', 'Đặng Phi'),
-('Bố Già', 17, '/images/books/placeholder.png', 'Thế giới ngầm và luật lệ danh dự của một gia tộc mafia Ý tại Mỹ.', 'Xây dựng nhân vật chặt chẽ, đặc biệt là hình tượng Don Corleone đầy uy quyền.', 'Tiếng Anh', 1969, 586, 'NXB Văn Học', 'Ngọc Thứ Lang'),
-('7 Thói Quen Hiệu Quả', 18, '/images/books/placeholder.png', 'Khung tư duy 7 thói quen giúp thay đổi bản thân từ gốc rễ.', 'Hệ thống hóa tốt, phù hợp đọc chậm và thực hành từng phần một.', 'Tiếng Anh', 1989, 432, 'NXB Tổng hợp TP.HCM', 'Vũ Tiến Phúc'),
-('Dám Bị Ghét', 19, '/images/books/placeholder.png', 'Đối thoại giữa triết gia và chàng thanh niên về tâm lý học Adler.', 'Cách trình bày dạng đối thoại dễ theo dõi, đặt lại nhiều quan niệm quen thuộc.', 'Tiếng Nhật', 2013, 336, 'NXB Lao Động', 'Nguyễn Đình Chính'),
-('Muôn Kiếp Nhân Sinh', 20, '/images/books/placeholder.png', 'Hành trình khám phá luật nhân quả qua các tiền kiếp được kể lại.', 'Nội dung pha trộn giữa tâm linh và lịch sử, gây nhiều tranh luận nhưng hấp dẫn.', 'Tiếng Anh', 2020, 500, 'NXB Tổng hợp TP.HCM', NULL),
-('Homo Deus', 6, '/images/books/placeholder.png', 'Những dự đoán về tương lai loài người trong thời đại công nghệ và dữ liệu.', 'Tiếp nối Sapiens với góc nhìn hướng tới tương lai, nhiều luận điểm gây tranh cãi.', 'Tiếng Hebrew', 2015, 450, 'NXB Thế Giới', 'Dương Ngọc Trà'),
-('Vũ Trụ Trong Vỏ Hạt Dẻ', 8, '/images/books/placeholder.png', 'Giải thích các khái niệm vật lý hiện đại như hố đen, không-thời gian.', 'Hình ảnh minh họa trực quan giúp người đọc phổ thông dễ tiếp cận hơn.', 'Tiếng Anh', 2001, 216, 'NXB Trẻ', 'Phạm Văn Thiều'),
-('Nghĩ Giàu Làm Giàu', 21, '/images/books/placeholder.png', 'Đúc kết 13 nguyên tắc thành công từ nghiên cứu hàng trăm triệu phú.', 'Một trong những cuốn sách truyền cảm hứng làm giàu kinh điển nhất mọi thời đại.', 'Tiếng Anh', 1937, 320, 'NXB Lao Động Xã Hội', 'Trịnh Vũ Thuận'),
-('Cha Giàu Cha Nghèo', 22, '/images/books/placeholder.png', 'So sánh tư duy tài chính giữa hai người cha để rút ra bài học về tiền bạc.', 'Thay đổi cách nhìn về tài sản và tiêu sản, dễ đọc cho người mới bắt đầu.', 'Tiếng Anh', 1997, 336, 'NXB Trẻ', 'Nguyễn Tiến Dũng'),
-('Zero to One', 23, '/images/books/placeholder.png', 'Tư duy tạo ra giá trị độc nhất thay vì cạnh tranh trong thị trường có sẵn.', 'Góc nhìn sắc bén từ nhà đầu tư công nghệ, nhiều ý tưởng phản trực giác.', 'Tiếng Anh', 2014, 224, 'NXB Trẻ', 'Vương Bảo Long'),
-('Nhà Lãnh Đạo Không Chức Danh', 24, '/images/books/placeholder.png', 'Ai cũng có thể lãnh đạo bằng hành động, không cần chức vụ.', 'Văn phong truyền cảm hứng, phù hợp người mới đi làm muốn phát triển bản thân.', 'Tiếng Anh', 2010, 288, 'NXB Trẻ', 'Thu Hằng'),
-('Súng, Vi Trùng và Thép', 25, '/images/books/placeholder.png', 'Lý giải vì sao các nền văn minh phát triển khác nhau qua yếu tố địa lý, dịch bệnh.', 'Lập luận công phu, kết hợp lịch sử, sinh học và địa lý theo hướng liên ngành.', 'Tiếng Anh', 1997, 528, 'NXB Lao Động', 'Trần Tiễn Cao Đăng'),
-('Đảo Giấu Vàng', 26, '/images/books/placeholder.png', 'Cuộc phiêu lưu tìm kho báu hải tặc của cậu bé Jim Hawkins.', 'Tác phẩm phiêu lưu kinh điển, nhịp truyện nhanh, cuốn hút từ đầu đến cuối.', 'Tiếng Anh', 1883, 292, 'NXB Kim Đồng', 'Đông A'),
-('Charlie Và Nhà Máy Sô-cô-la', 27, '/images/books/placeholder.png', 'Cậu bé nghèo Charlie may mắn trúng vé tham quan nhà máy sô-cô-la kỳ diệu.', 'Trí tưởng tượng phong phú, phù hợp đọc cùng trẻ nhỏ vào mỗi tối.', 'Tiếng Anh', 1964, 208, 'NXB Kim Đồng', 'Nguyễn Hoàng Linh');
+('Tôi Thấy Hoa Vàng Trên Cỏ Xanh', 1, '/images/books/placeholder.jpg', 'Một câu chuyện trong trẻo về tuổi thơ, tình thân và những rung động đầu đời.', 'Tác phẩm có giọng kể nhẹ, giàu hình ảnh và giàu cảm xúc. Điểm mạnh là cách tác giả tái hiện thế giới trẻ thơ vừa hồn nhiên vừa nhiều tổn thương.', 'Tiếng Việt', 2010, 378, 'NXB Trẻ', NULL),
+('Nhà Giả Kim', 2, '/images/books/placeholder.jpg', 'Hành trình đi tìm kho báu cũng là hành trình nhận ra ước mơ và bản thân.', 'Cuốn sách dễ đọc, giàu tính biểu tượng. Phù hợp với người đọc thích những thông điệp ngắn gọn về ước mơ và lựa chọn cá nhân.', 'Tiếng Bồ Đào Nha', 1988, 227, 'NXB Hội Nhà Văn', 'Lê Chu Cầu'),
+('Đắc Nhân Tâm', 3, '/images/books/placeholder.jpg', 'Sách kinh điển về giao tiếp, ứng xử và xây dựng quan hệ.', 'Nội dung thực tế, nhiều nguyên tắc dễ áp dụng. Khi đọc cần chọn lọc để tránh biến giao tiếp thành kỹ thuật máy móc.', 'Tiếng Anh', 1936, 320, 'NXB Tổng hợp TP.HCM', 'Nguyễn Hiến Lê'),
+('Atomic Habits', 4, '/images/books/placeholder.jpg', 'Hệ thống xây dựng thói quen nhỏ nhưng tạo thay đổi lớn theo thời gian.', 'Sách có cấu trúc rõ, ví dụ dễ hiểu. Giá trị chính nằm ở cách biến mục tiêu lớn thành hệ thống hành động nhỏ và đều đặn.', 'Tiếng Anh', 2018, 320, 'NXB Thế Giới', 'Nguyễn Minh Trang'),
+('Tuổi Trẻ Đáng Giá Bao Nhiêu', 5, '/images/books/placeholder.jpg', 'Những suy ngẫm về học tập, trải nghiệm, đọc sách và trưởng thành.', 'Phù hợp với học sinh, sinh viên đang tìm định hướng. Văn phong gần gũi, dễ tiếp cận, thiên về động lực cá nhân.', 'Tiếng Việt', 2016, 260, 'NXB Hội Nhà Văn', NULL),
+('Sapiens', 6, '/images/books/placeholder.jpg', 'Lược sử loài người qua các giai đoạn nhận thức, nông nghiệp, xã hội và khoa học.', 'Một cuốn sách giàu góc nhìn tổng hợp. Nên đọc với tinh thần phản biện vì sách đưa ra nhiều diễn giải rộng về lịch sử và xã hội.', 'Tiếng Hebrew', 2011, 443, 'NXB Tri Thức', 'Nguyễn Thủy Chung'),
+('Dế Mèn Phiêu Lưu Ký', 7, '/images/books/placeholder.jpg', 'Tác phẩm thiếu nhi kinh điển về hành trình trưởng thành của Dế Mèn.', 'Truyện có tính phiêu lưu, giàu bài học về trách nhiệm, lòng dũng cảm và sự khiêm tốn.', 'Tiếng Việt', 1941, 155, 'NXB Kim Đồng', NULL),
+('Lược Sử Thời Gian', 8, '/images/books/placeholder.jpg', 'Giới thiệu các ý tưởng lớn về vũ trụ học cho độc giả phổ thông.', 'Một cuốn sách kích thích tò mò khoa học, tuy có một số phần cần đọc chậm để nắm ý tưởng.', 'Tiếng Anh', 1988, 256, 'NXB Trẻ', 'Cao Chi, Phạm Văn Thiều'),
+('Không Gia Đình', 9, '/images/books/placeholder.jpg', 'Câu chuyện cảm động về cậu bé Rémi trên hành trình mưu sinh.', 'Tác phẩm giàu cảm xúc, đề cao lòng nhân ái và nghị lực sống.', 'Tiếng Pháp', 1878, 559, 'NXB Văn Học', 'Huỳnh Lý'),
+('Khởi Nghiệp Tinh Gọn', 10, '/images/books/placeholder.jpg', 'Phương pháp xây dựng sản phẩm dựa trên thử nghiệm, đo lường và học hỏi.', 'Nội dung phù hợp với người quan tâm startup và phát triển sản phẩm.', 'Tiếng Anh', 2011, 320, 'NXB Lao Động Xã Hội', 'Đặng Trần Phương'),
+('Clean Code', 11, '/images/books/placeholder.jpg', 'Các nguyên tắc viết mã rõ ràng, dễ bảo trì.', 'Sách hữu ích cho lập trình viên muốn cải thiện chất lượng code.', 'Tiếng Anh', 2008, 464, 'NXB Khoa Học Kỹ Thuật', 'Nguyễn Thành Nam'),
+('Việt Nam Sử Lược', 12, '/images/books/placeholder.jpg', 'Tổng thuật lịch sử Việt Nam theo lối viết cổ điển.', 'Nên đọc như một tài liệu tham khảo lịch sử, kết hợp với nguồn hiện đại để đối chiếu.', 'Tiếng Việt', 1920, 588, 'NXB Văn Học', NULL),
+('Chí Phèo', 13, '/images/books/placeholder.jpg', 'Bi kịch của một người nông dân bị tha hóa bởi xã hội thực dân phong kiến.', 'Ngòi bút hiện thực sắc sảo, khắc họa nỗi đau con người bị cự tuyệt quyền làm người.', 'Tiếng Việt', 1941, 220, 'NXB Văn Học', NULL),
+('Số Đỏ', 14, '/images/books/placeholder.jpg', 'Bức tranh trào phúng về xã hội thượng lưu rởm đời thời Pháp thuộc.', 'Giọng văn châm biếm sắc bén, nhân vật Xuân Tóc Đỏ trở thành biểu tượng văn học.', 'Tiếng Việt', 1936, 262, 'NXB Văn Học', NULL),
+('Mắt Biếc', 1, '/images/books/placeholder.jpg', 'Mối tình đơn phương dai dẳng của Ngạn dành cho Hà Lan từ thuở nhỏ đến khi trưởng thành.', 'Câu chuyện nhẹ nhàng nhưng day dứt, khắc họa tình yêu thuần khiết và sự tiếc nuối.', 'Tiếng Việt', 1990, 300, 'NXB Trẻ', NULL),
+('Hoàng Tử Bé', 15, '/images/books/placeholder.jpg', 'Cuộc gặp gỡ giữa phi công lạc giữa sa mạc và vị hoàng tử đến từ hành tinh khác.', 'Tác phẩm tưởng viết cho trẻ em nhưng chứa nhiều triết lý sâu sắc về cuộc sống.', 'Tiếng Pháp', 1943, 96, 'NXB Kim Đồng', 'Vĩnh Lạc'),
+('1984', 16, '/images/books/placeholder.jpg', 'Xã hội toàn trị nơi mọi hành vi, tư tưởng đều bị giám sát bởi Big Brother.', 'Tác phẩm kinh điển về chủ đề tự do cá nhân, vẫn còn tính thời sự cao.', 'Tiếng Anh', 1949, 328, 'NXB Hội Nhà Văn', 'Đặng Phi'),
+('Bố Già', 17, '/images/books/placeholder.jpg', 'Thế giới ngầm và luật lệ danh dự của một gia tộc mafia Ý tại Mỹ.', 'Xây dựng nhân vật chặt chẽ, đặc biệt là hình tượng Don Corleone đầy uy quyền.', 'Tiếng Anh', 1969, 586, 'NXB Văn Học', 'Ngọc Thứ Lang'),
+('7 Thói Quen Hiệu Quả', 18, '/images/books/placeholder.jpg', 'Khung tư duy 7 thói quen giúp thay đổi bản thân từ gốc rễ.', 'Hệ thống hóa tốt, phù hợp đọc chậm và thực hành từng phần một.', 'Tiếng Anh', 1989, 432, 'NXB Tổng hợp TP.HCM', 'Vũ Tiến Phúc'),
+('Dám Bị Ghét', 19, '/images/books/placeholder.jpg', 'Đối thoại giữa triết gia và chàng thanh niên về tâm lý học Adler.', 'Cách trình bày dạng đối thoại dễ theo dõi, đặt lại nhiều quan niệm quen thuộc.', 'Tiếng Nhật', 2013, 336, 'NXB Lao Động', 'Nguyễn Đình Chính'),
+('Muôn Kiếp Nhân Sinh', 20, '/images/books/placeholder.jpg', 'Hành trình khám phá luật nhân quả qua các tiền kiếp được kể lại.', 'Nội dung pha trộn giữa tâm linh và lịch sử, gây nhiều tranh luận nhưng hấp dẫn.', 'Tiếng Anh', 2020, 500, 'NXB Tổng hợp TP.HCM', NULL),
+('Homo Deus', 6, '/images/books/placeholder.jpg', 'Những dự đoán về tương lai loài người trong thời đại công nghệ và dữ liệu.', 'Tiếp nối Sapiens với góc nhìn hướng tới tương lai, nhiều luận điểm gây tranh cãi.', 'Tiếng Hebrew', 2015, 450, 'NXB Thế Giới', 'Dương Ngọc Trà'),
+('Vũ Trụ Trong Vỏ Hạt Dẻ', 8, '/images/books/placeholder.jpg', 'Giải thích các khái niệm vật lý hiện đại như hố đen, không-thời gian.', 'Hình ảnh minh họa trực quan giúp người đọc phổ thông dễ tiếp cận hơn.', 'Tiếng Anh', 2001, 216, 'NXB Trẻ', 'Phạm Văn Thiều'),
+('Nghĩ Giàu Làm Giàu', 21, '/images/books/placeholder.jpg', 'Đúc kết 13 nguyên tắc thành công từ nghiên cứu hàng trăm triệu phú.', 'Một trong những cuốn sách truyền cảm hứng làm giàu kinh điển nhất mọi thời đại.', 'Tiếng Anh', 1937, 320, 'NXB Lao Động Xã Hội', 'Trịnh Vũ Thuận'),
+('Cha Giàu Cha Nghèo', 22, '/images/books/placeholder.jpg', 'So sánh tư duy tài chính giữa hai người cha để rút ra bài học về tiền bạc.', 'Thay đổi cách nhìn về tài sản và tiêu sản, dễ đọc cho người mới bắt đầu.', 'Tiếng Anh', 1997, 336, 'NXB Trẻ', 'Nguyễn Tiến Dũng'),
+('Zero to One', 23, '/images/books/placeholder.jpg', 'Tư duy tạo ra giá trị độc nhất thay vì cạnh tranh trong thị trường có sẵn.', 'Góc nhìn sắc bén từ nhà đầu tư công nghệ, nhiều ý tưởng phản trực giác.', 'Tiếng Anh', 2014, 224, 'NXB Trẻ', 'Vương Bảo Long'),
+('Nhà Lãnh Đạo Không Chức Danh', 24, '/images/books/placeholder.jpg', 'Ai cũng có thể lãnh đạo bằng hành động, không cần chức vụ.', 'Văn phong truyền cảm hứng, phù hợp người mới đi làm muốn phát triển bản thân.', 'Tiếng Anh', 2010, 288, 'NXB Trẻ', 'Thu Hằng'),
+('Súng, Vi Trùng và Thép', 25, '/images/books/placeholder.jpg', 'Lý giải vì sao các nền văn minh phát triển khác nhau qua yếu tố địa lý, dịch bệnh.', 'Lập luận công phu, kết hợp lịch sử, sinh học và địa lý theo hướng liên ngành.', 'Tiếng Anh', 1997, 528, 'NXB Lao Động', 'Trần Tiễn Cao Đăng'),
+('Đảo Giấu Vàng', 26, '/images/books/placeholder.jpg', 'Cuộc phiêu lưu tìm kho báu hải tặc của cậu bé Jim Hawkins.', 'Tác phẩm phiêu lưu kinh điển, nhịp truyện nhanh, cuốn hút từ đầu đến cuối.', 'Tiếng Anh', 1883, 292, 'NXB Kim Đồng', 'Đông A'),
+('Charlie Và Nhà Máy Sô-cô-la', 27, '/images/books/placeholder.jpg', 'Cậu bé nghèo Charlie may mắn trúng vé tham quan nhà máy sô-cô-la kỳ diệu.', 'Trí tưởng tượng phong phú, phù hợp đọc cùng trẻ nhỏ vào mỗi tối.', 'Tiếng Anh', 1964, 208, 'NXB Kim Đồng', 'Nguyễn Hoàng Linh');
 
 -- Ảnh bìa thật cho các sách đã có sẵn file trong public/images/books/
--- (các sách còn lại dùng '/images/books/placeholder.png' như đã chèn ở trên).
+-- (các sách còn lại dùng '/images/books/placeholder.jpg' như đã chèn ở trên).
 UPDATE books SET cover_image = '/images/books/Toithayhoavangtrencoxanh.jpg' WHERE title = 'Tôi Thấy Hoa Vàng Trên Cỏ Xanh';
-UPDATE books SET cover_image = '/images/books/nhagiakim.png' WHERE title = 'Nhà Giả Kim';
-UPDATE books SET cover_image = '/images/books/dacnhantam.png' WHERE title = 'Đắc Nhân Tâm';
+UPDATE books SET cover_image = '/images/books/nhagiakim.jpg' WHERE title = 'Nhà Giả Kim';
+UPDATE books SET cover_image = '/images/books/dacnhantam.jpg' WHERE title = 'Đắc Nhân Tâm';
 UPDATE books SET cover_image = '/images/books/AtomicHabits.jpg' WHERE title = 'Atomic Habits';
 UPDATE books SET cover_image = '/images/books/tuoi-tre-dang-gia-bao-nhieu.jpg' WHERE title = 'Tuổi Trẻ Đáng Giá Bao Nhiêu';
-UPDATE books SET cover_image = '/images/books/Sapiens.png' WHERE title = 'Sapiens';
+UPDATE books SET cover_image = '/images/books/Sapiens.jpg' WHERE title = 'Sapiens';
 
 -- Gắn tag thể loại cho từng sách (book_id, category_id) — nhiều sách có từ 2 tag trở lên.
 INSERT INTO book_categories (book_id, category_id) VALUES

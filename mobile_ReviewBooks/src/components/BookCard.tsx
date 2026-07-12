@@ -14,7 +14,7 @@ interface BookCardProps {
 export default function BookCard({ book, onPress }: BookCardProps) {
   return (
     <Pressable style={({ pressed }) => [styles.card, pressed && styles.pressed]} onPress={onPress}>
-      <Image source={{ uri: `${API_BASE_URL}/images/books/placeholder.png` }} style={styles.cover} />
+      <Image source={{ uri: `${API_BASE_URL}${book.cover_image}` }} style={styles.cover} resizeMode="contain" />
       <Text style={styles.title} numberOfLines={2}>
         {book.title}
       </Text>

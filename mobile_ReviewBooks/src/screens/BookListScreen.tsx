@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, FlatList, TextInput, Text, Pressable, StyleSheet } from 'react-native';
+import { View, FlatList, TextInput, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BookStackParamList } from '../navigation/types';
 import { Book } from '../types';
 import * as booksApi from '../api/booksApi';
 import * as categoriesApi from '../api/categoriesApi';
 import BookCard from '../components/BookCard';
+import Dropdown from '../components/Dropdown';
 import EmptyState from '../components/EmptyState';
 import InfiniteScrollFooter from '../components/InfiniteScrollFooter';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -78,31 +79,20 @@ export default function BookListScreen({ navigation }: Props) {
         returnKeyType="search"
       />
 
-      <FlatList
-        horizontal
-        data={['', ...categories]}
-        keyExtractor={(item) => item || 'all'}
-        showsHorizontalScrollIndicator={false}
-        style={styles.chipRow}
-        renderItem={({ item }) => (
-          <Pressable style={[styles.chip, category === item && styles.chipActive]} onPress={() => setCategory(item)}>
-            <Text style={[styles.chipText, category === item && styles.chipTextActive]}>{item || 'Tất cả'}</Text>
-          </Pressable>
-        )}
-      />
-
-      <FlatList
-        horizontal
-        data={SORT_OPTIONS}
-        keyExtractor={(item) => item.key}
-        showsHorizontalScrollIndicator={false}
-        style={styles.chipRow}
-        renderItem={({ item }) => (
-          <Pressable style={[styles.chip, sort === item.key && styles.chipActive]} onPress={() => setSort(item.key)}>
-            <Text style={[styles.chipText, sort === item.key && styles.chipTextActive]}>{item.label}</Text>
-          </Pressable>
-        )}
-      />
+      <View style={styles.filterRow}>
+        <Dropdown
+          style={styles.filterHalf}
+          value={category}
+          options={[{ label: 'Tất cả thể loại', value: '' }, ...categories.map((c) => ({ label: c, value: c }))]}
+          onSelect={setCategory}
+        />
+        <Dropdown
+          style={styles.filterHalf}
+          value={sort}
+          options={SORT_OPTIONS.map((o) => ({ label: o.label, value: o.key }))}
+          onSelect={(v) => setSort(v as SortOption)}
+        />
+      </View>
 
       {initialLoading ? (
         <LoadingSpinner />
@@ -137,19 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     color: colors.text,
   },
-  chipRow: { marginHorizontal: spacing.md, marginBottom: spacing.sm, maxHeight: 40 },
-  chip: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.border,
-    marginRight: spacing.sm,
-    backgroundColor: colors.surface,
-    justifyContent: 'center',
-  },
-  chipActive: { backgroundColor: colors.accent, borderColor: colors.accent },
-  chipText: { fontSize: 12, color: colors.textSoft },
-  chipTextActive: { color: '#fff', fontWeight: '700' },
+  filterRow: { flexDirection: 'row', gap: spacing.sm, marginHorizontal: spacing.md, marginBottom: spacing.md },
+  filterHalf: { flex: 1 },
   listContent: { paddingHorizontal: spacing.xs, paddingBottom: spacing.xxl },
 });

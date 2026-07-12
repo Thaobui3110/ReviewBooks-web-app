@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Image, StyleSheet, useWindowDimensions } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BookStackParamList } from '../navigation/types';
 import { Book, Comment, RatingStats } from '../types';
 import * as booksApi from '../api/booksApi';
 import { useAuth } from '../context/AuthContext';
-import { useAppMessage } from '../context/AppMessageContext';
 import StarRatingDisplay from '../components/StarRatingDisplay';
 import CommentItem from '../components/CommentItem';
 import CommentForm from '../components/CommentForm';
@@ -22,7 +21,7 @@ type Props = NativeStackScreenProps<BookStackParamList, 'BookDetail'>;
 export default function BookDetailScreen({ route, navigation }: Props) {
   const { bookId } = route.params;
   const { user } = useAuth();
-  const { showMessage } = useAppMessage();
+  const { height: windowHeight } = useWindowDimensions();
 
   const [book, setBook] = useState<Book | null>(null);
   const [rating, setRating] = useState<RatingStats | null>(null);
@@ -54,20 +53,17 @@ export default function BookDetailScreen({ route, navigation }: Props) {
   async function handleCreateComment(content: string, ratingValue: number) {
     await booksApi.createComment(bookId, content, ratingValue);
     setShowNewForm(false);
-    showMessage('success', 'Đã gửi đánh giá của bạn.');
     await load();
   }
 
   async function handleUpdateComment(commentId: number, content: string, ratingValue: number) {
     await booksApi.updateComment(bookId, commentId, content, ratingValue);
     setEditingCommentId(null);
-    showMessage('success', 'Đã cập nhật bình luận.');
     await load();
   }
 
   async function handleDeleteComment(commentId: number) {
     await booksApi.deleteComment(bookId, commentId);
-    showMessage('success', 'Đã xoá bình luận.');
     await load();
   }
 
@@ -75,7 +71,11 @@ export default function BookDetailScreen({ route, navigation }: Props) {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Image source={{ uri: `${API_BASE_URL}/images/books/placeholder.png` }} style={styles.cover} />
+      <Image
+        source={{ uri: `${API_BASE_URL}${book.cover_image}` }}
+        style={[styles.cover, { height: windowHeight * 0.5 }]}
+        resizeMode="contain"
+      />
 
       <View style={styles.tagsRow}>
         {book.tags.map((tag) => (
@@ -89,15 +89,15 @@ export default function BookDetailScreen({ route, navigation }: Props) {
       <Text style={styles.authorLine}>Tác giả: {book.author}</Text>
       <StarRatingDisplay value={rating?.average_rating ?? 0} count={rating?.total} />
 
-      <Text style={styles.sectionTitle}>Giới thiệu</Text>
-      <Text style={typography.body}>{book.description}</Text>
-
       <Text style={styles.sectionTitle}>Thông tin chi tiết</Text>
       <InfoRow label="Ngôn ngữ gốc" value={book.language ?? 'Chưa cập nhật'} />
       <InfoRow label="Năm xuất bản" value={book.publish_year ? String(book.publish_year) : 'Chưa cập nhật'} />
       <InfoRow label="Số trang" value={book.page_count ? `${book.page_count} trang` : 'Chưa cập nhật'} />
       <InfoRow label="Nhà xuất bản" value={book.publisher ?? 'Chưa cập nhật'} />
       {book.translator ? <InfoRow label="Người dịch" value={book.translator} /> : null}
+
+      <Text style={styles.sectionTitle}>Giới thiệu</Text>
+      <Text style={typography.body}>{book.description}</Text>
 
       <Text style={styles.sectionTitle}>Về tác giả</Text>
       <View style={styles.authorCard}>
@@ -114,7 +114,7 @@ export default function BookDetailScreen({ route, navigation }: Props) {
         </>
       ) : null}
 
-      <Text style={styles.sectionTitle}>Đánh giá và bình luận ({comments.length})</Text>
+      <Text style={styles.reviewsSectionTitle}>Đánh giá và bình luận ({comments.length})</Text>
 
       {user ? (
         showNewForm ? (
@@ -179,7 +179,8 @@ const styles = StyleSheet.create({
   tag: { backgroundColor: colors.accentSoft, borderRadius: 20, paddingHorizontal: spacing.md, paddingVertical: 4 },
   tagText: { fontSize: 11, color: colors.accentHover, fontWeight: '600' },
   authorLine: { color: colors.textMuted, marginBottom: spacing.sm },
-  sectionTitle: { fontSize: 16, fontWeight: '700', color: colors.text, marginTop: spacing.xl, marginBottom: spacing.sm },
+  sectionTitle: { fontSize: 16, fontWeight: '700', color: colors.text, marginTop: spacing.xxxl, marginBottom: spacing.md },
+  reviewsSectionTitle: { fontSize: 22, marginTop: spacing.xxxl, marginBottom: spacing.md, fontWeight: '700', color: colors.text },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',

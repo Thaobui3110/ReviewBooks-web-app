@@ -54,7 +54,7 @@ export default function ReviewsFeedScreen() {
       ListEmptyComponent={<EmptyState text="Chưa có bình luận nào." />}
       renderItem={({ item }) => (
         <View style={styles.item}>
-          <Image source={{ uri: `${API_BASE_URL}/images/books/placeholder.png` }} style={styles.cover} />
+          <Image source={{ uri: `${API_BASE_URL}${item.book_cover_image}` }} style={styles.cover} />
           <View style={styles.itemBody}>
             <View style={styles.itemHead}>
               <Text style={styles.bookTitle} numberOfLines={1}>
