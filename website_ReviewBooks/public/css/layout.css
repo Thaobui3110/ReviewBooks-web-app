@@ -401,7 +401,7 @@ main { min-height: 60vh; padding: var(--space-8) 0; }
   align-items: center;
   background:
     linear-gradient(112deg, rgba(29, 33, 27, .92), rgba(29, 33, 27, .78) 48%, rgba(166, 95, 43, .34)),
-    url("/images/books/book-1.svg") right 8% center / min(32vw, 340px) auto no-repeat,
+    url("/images/books/Toithayhoavangtrencoxanh.jpg") right 8% center / min(32vw, 340px) auto no-repeat,
     #56664d;
   color: #fbf8f0;
 }

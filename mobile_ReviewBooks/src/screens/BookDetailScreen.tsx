@@ -101,9 +101,7 @@ export default function BookDetailScreen({ route, navigation }: Props) {
 
       <Text style={styles.sectionTitle}>Về tác giả</Text>
       <View style={styles.authorCard}>
-        {!book.author_avatar.endsWith('.svg') ? (
-          <Image source={{ uri: `${API_BASE_URL}${book.author_avatar}` }} style={styles.authorAvatar} />
-        ) : null}
+        <Image source={{ uri: `${API_BASE_URL}${book.author_avatar}` }} style={styles.authorAvatar} />
         <Text style={[typography.body, styles.authorBio]}>
           {book.author_bio ?? 'Chưa có thông tin giới thiệu về tác giả này.'}
         </Text>

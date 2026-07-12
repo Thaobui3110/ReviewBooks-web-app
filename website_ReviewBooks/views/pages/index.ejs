@@ -24,7 +24,7 @@
     <% books.slice(0, 6).forEach(function(book) { %>
       <article class="book-card">
         <a href="/books/<%= book.id %>">
-          <img src="<%= book.cover_image || '/images/books/default-book.svg' %>" alt="Bìa sách <%= book.title %>">
+          <img src="<%= book.cover_image || '/images/books/placeholder.png' %>" alt="Bìa sách <%= book.title %>">
         </a>
         <div class="book-card-body">
           <h3><a href="/books/<%= book.id %>"><%= book.title %></a></h3>
