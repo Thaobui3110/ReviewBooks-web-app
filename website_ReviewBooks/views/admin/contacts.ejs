@@ -1,0 +1,26 @@
+<%- include('../partials/admin-header') %>
+
+<h1>Liên hệ</h1>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th>Họ tên</th><th>Email</th><th>Tiêu đề</th><th>Nội dung</th><th>Ngày</th></tr>
+    </thead>
+    <tbody>
+      <% contacts.forEach((contact) => { %>
+        <tr>
+          <td><%= contact.name %></td>
+          <td><%= contact.email %></td>
+          <td><%= contact.subject %></td>
+          <td class="wrap"><%= contact.message %></td>
+          <td><%= new Date(contact.created_at).toLocaleDateString('vi-VN') %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/pagination') %>
+
+<%- include('../partials/admin-footer') %>

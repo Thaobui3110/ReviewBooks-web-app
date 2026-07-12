@@ -1,0 +1,97 @@
+<%- include('../partials/admin-header') %>
+
+<h1><%= mode === 'create' ? 'Thêm sách' : 'Sửa sách' %></h1>
+
+<% if (error) { %>
+  <div class="alert alert-error"><%= error %></div>
+<% } %>
+
+<div class="card card-pad">
+  <form method="POST" action="<%= mode === 'create' ? '/admin/books/create' : `/admin/books/${book.id}/edit` %>" data-validate-form novalidate>
+    <%
+      const _selectedAuthorId = String(book.author_id || book.authorId || '');
+    %>
+    <div class="form-row form-row-2">
+      <div class="field">
+        <label for="title">Tên sách</label>
+        <input type="text" id="title" name="title" required minlength="2" maxlength="200" value="<%= book.title || '' %>">
+      </div>
+      <div class="field">
+        <label for="author_id">Tác giả</label>
+        <select id="author_id" name="author_id" required>
+          <option value="">-- Chọn tác giả --</option>
+          <% authors.forEach((a) => { %>
+            <option value="<%= a.id %>" <%= _selectedAuthorId === String(a.id) ? 'selected' : '' %>><%= a.name %></option>
+          <% }) %>
+        </select>
+        <p class="hint">Chưa thấy tác giả cần chọn? <a href="/admin/authors/create" target="_blank">Thêm tác giả mới</a> rồi quay lại đây.</p>
+      </div>
+    </div>
+
+    <%
+      const _selectedIds = new Set((book.tags || []).map((t) => String(t.id)));
+    %>
+    <div class="field">
+      <label>Thể loại (chọn 1 hoặc nhiều)</label>
+      <div class="checkbox-grid">
+        <% categories.forEach((cat) => { %>
+          <label class="checkbox-item">
+            <input type="checkbox" name="categories" value="<%= cat.id %>" <%= _selectedIds.has(String(cat.id)) ? 'checked' : '' %>>
+            <span><%= cat.name %></span>
+          </label>
+        <% }) %>
+      </div>
+      <p class="hint">Chưa thấy thể loại cần chọn? <a href="/admin/categories" target="_blank">Quản lý thể loại</a> ở tab mới rồi quay lại đây (không mất dữ liệu đang nhập).</p>
+    </div>
+
+    <div class="form-row form-row-2">
+      <div class="field">
+        <label for="cover_image">Đường dẫn ảnh bìa</label>
+        <input type="text" id="cover_image" name="cover_image" placeholder="/images/books/default-book.svg" value="<%= book.cover_image || '' %>">
+      </div>
+      <div class="field">
+        <label for="publisher">Nhà xuất bản</label>
+        <input type="text" id="publisher" name="publisher" maxlength="150" value="<%= book.publisher || '' %>">
+      </div>
+    </div>
+
+    <div class="form-row form-row-2">
+      <div class="field">
+        <label for="language">Ngôn ngữ gốc</label>
+        <input type="text" id="language" name="language" maxlength="80" placeholder="Tiếng Việt, Tiếng Anh..." value="<%= book.language || '' %>">
+      </div>
+      <div class="field">
+        <label for="translator">Người dịch</label>
+        <input type="text" id="translator" name="translator" maxlength="150" placeholder="Để trống nếu là sách tiếng Việt gốc" value="<%= book.translator || '' %>">
+      </div>
+    </div>
+
+    <div class="form-row form-row-2">
+      <div class="field">
+        <label for="publish_year">Năm xuất bản đầu tiên</label>
+        <input type="number" id="publish_year" name="publish_year" min="1000" max="<%= new Date().getFullYear() %>" value="<%= book.publish_year || '' %>">
+      </div>
+      <div class="field">
+        <label for="page_count">Số trang</label>
+        <input type="number" id="page_count" name="page_count" min="1" max="20000" value="<%= book.page_count || '' %>">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="description">Mô tả ngắn</label>
+      <textarea id="description" name="description" maxlength="3000"><%= book.description || '' %></textarea>
+    </div>
+
+    <div class="field">
+      <label for="review_content">Nhận xét / đánh giá của ban biên tập</label>
+      <textarea id="review_content" name="review_content" maxlength="6000"><%= book.review_content || '' %></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit"><%= mode === 'create' ? 'Thêm sách' : 'Lưu thay đổi' %></button>
+      <a class="btn btn-outline" href="/admin/books">Hủy</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/admin-footer') %>

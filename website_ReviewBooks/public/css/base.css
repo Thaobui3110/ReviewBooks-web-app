@@ -1,0 +1,116 @@
+/* Design tokens + reset + typography */
+:root {
+  /* Warm "paper & ink" palette, referenced from ReviewBooks v1 */
+  --color-bg: #f7f1e7;
+  --color-bg-subtle: #f7f1e7;
+  --color-surface: #fffdf8;
+  --color-surface-warm: #f8eddd;
+  --color-border: #ded1bd;
+  --color-border-strong: #c6b496;
+  --color-text: #1d211b;
+  --color-text-soft: #3e4538;
+  --color-text-muted: #66715f;
+  --color-accent: #a65f2b;
+  --color-accent-hover: #6f3a1f;
+  --color-accent-soft: #ead1b5;
+  --color-sage: #8fa184;
+  --color-sage-dark: #56664d;
+  --color-star: #c98a2b;
+  --color-star-empty: #e3d7c2;
+  --color-success: #4b7a3d;
+  --color-success-soft: #dfead3;
+  --color-danger: #a13a2f;
+  --color-danger-soft: #f2d8d1;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 3px rgba(82, 58, 34, .10);
+  --shadow-md: 0 12px 30px rgba(82, 58, 34, .12);
+  --shadow-lg: 0 24px 48px rgba(82, 58, 34, .22);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  --container: 1200px;
+  --font-sans: "Segoe UI", "Helvetica Neue", -apple-system, Roboto, Arial, sans-serif;
+
+  /* Thang cỡ chữ cố định 5 mức, gom lại từ ~18 giá trị rời rạc trước đó */
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+
+  --transition-fast: .15s ease;
+  --transition-base: .25s ease;
+}
+
+* , *::before, *::after { box-sizing: border-box; }
+
+/* <button> không tự kế thừa font/line-height của trang như các thẻ khác (mặc định
+   trình duyệt dùng font hệ thống riêng, vd. Arial trên Windows) — nếu không reset,
+   nút bấm sẽ có chiều cao khác với link/thẻ khác dùng chung class .btn (vd. nút Xóa
+   thấp hơn nút Sửa dù cùng padding/font-size). Firefox còn thêm viền focus ẩn bên
+   trong nút, cũng cần bỏ để độ cao nút khớp chính xác giữa các trình duyệt. */
+button {
+  font: inherit;
+  margin: 0;
+}
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; overflow-y: scroll; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(166, 95, 43, .09), transparent 30rem),
+    linear-gradient(180deg, #fbf8f0, var(--color-bg));
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 var(--space-3); font-weight: 700; }
+h1 { font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem); }
+h2 { font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem); }
+h3 { font-size: var(--text-lg); }
+p { margin: 0 0 var(--space-4); color: var(--color-text-muted); }
+
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { color: var(--color-accent-hover); }
+
+img { max-width: 100%; display: block; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+@media (min-width: 800px) {
+  .container { padding: 0 var(--space-6); }
+}
+
+::selection { background: var(--color-accent-soft); color: var(--color-accent-hover); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: var(--radius-sm); }

@@ -1,0 +1,13 @@
+<dialog class="ad-popup" data-popup>
+  <div class="popup-banner">
+    <button class="popup-close" type="button" data-popup-close aria-label="Đóng quảng cáo">&times;</button>
+    <span class="badge">Gợi ý hôm nay</span>
+    <h3>Sách đáng đọc trong tuần</h3>
+    <p style="color: rgba(255,255,255,.9); margin: 0;">Khám phá những cuốn sách được cộng đồng ReviewBooks đánh giá cao nhất tuần này.</p>
+  </div>
+  <div class="popup-body">
+    <h3><%= locals.book ? book.title : 'Đắc Nhân Tâm' %></h3>
+    <p><%= locals.book ? book.description : 'Sách kinh điển về giao tiếp, ứng xử và xây dựng quan hệ.' %></p>
+    <a class="btn btn-primary btn-block" href="<%= locals.book ? `/books/${book.id}` : '/books' %>">Xem chi tiết</a>
+  </div>
+</dialog>

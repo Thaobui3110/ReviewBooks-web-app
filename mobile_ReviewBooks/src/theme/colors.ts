@@ -1,0 +1,22 @@
+// Lấy từ public/css/base.css của website_ReviewBooks để đồng bộ màu sắc.
+export const colors = {
+  bg: '#f7f1e7',
+  surface: '#fffdf8',
+  surfaceWarm: '#f8eddd',
+  border: '#ded1bd',
+  borderStrong: '#c6b496',
+  text: '#1d211b',
+  textSoft: '#3e4538',
+  textMuted: '#66715f',
+  accent: '#a65f2b',
+  accentHover: '#6f3a1f',
+  accentSoft: '#ead1b5',
+  sage: '#8fa184',
+  sageDark: '#56664d',
+  star: '#c98a2b',
+  starEmpty: '#e3d7c2',
+  success: '#4b7a3d',
+  successSoft: '#dfead3',
+  danger: '#a13a2f',
+  dangerSoft: '#f2d8d1',
+};

@@ -1,0 +1,27 @@
+<% if (typeof pagination !== 'undefined' && pagination.hasPagination) { %>
+  <ul class="pagination">
+    <li>
+      <% if (pagination.hasPrevious) { %>
+        <a href="<%= buildPageUrl(pagination.currentPage - 1) %>" aria-label="Trang trước">&laquo;</a>
+      <% } else { %>
+        <span class="is-disabled">&laquo;</span>
+      <% } %>
+    </li>
+    <% for (let p = 1; p <= pagination.totalPages; p++) { %>
+      <li>
+        <% if (p === pagination.currentPage) { %>
+          <span class="is-current"><%= p %></span>
+        <% } else { %>
+          <a href="<%= buildPageUrl(p) %>"><%= p %></a>
+        <% } %>
+      </li>
+    <% } %>
+    <li>
+      <% if (pagination.hasNext) { %>
+        <a href="<%= buildPageUrl(pagination.currentPage + 1) %>" aria-label="Trang sau">&raquo;</a>
+      <% } else { %>
+        <span class="is-disabled">&raquo;</span>
+      <% } %>
+    </li>
+  </ul>
+<% } %>

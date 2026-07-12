@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<section class="hero-section"<% if (typeof flash !== 'undefined' && flash) { %> style="margin-top: 0;"<% } %>>
+  <div class="hero-copy">
+    <p class="eyebrow">Không gian đánh giá sách của cộng đồng</p>
+    <h1>ĐÁNH GIÁ SÁCH</h1>
+    <p>
+      Chào mừng bạn đến với Trang đánh giá sách - nơi bạn khám phá các đầu sách, đọc nhận xét và chia sẻ cảm nhận về sách.
+      Xem đa dạng thể loại sách, đọc đánh giá từ cộng đồng và gửi cảm nhận của riêng bạn cho cuốn sách yêu thích.
+    </p>
+    <a class="primary-link" href="/books">Khám phá thư viện</a>
+  </div>
+</section>
+
+<section class="intro-section">
+  <h2>Giới thiệu về web</h2>
+  <p>Châm ngôn</p>
+  <p class="intro-quote">Một cuốn sách tốt là một người bạn trầm lặng nhưng bền bỉ.</p>
+</section>
+
+<section id="reviews-section" class="favorite-section">
+  <h2>Sách được ưa thích</h2>
+  <div class="favorite-grid">
+    <% books.slice(0, 6).forEach(function(book) { %>
+      <article class="book-card">
+        <a href="/books/<%= book.id %>">
+          <img src="<%= book.cover_image || '/images/books/default-book.svg' %>" alt="Bìa sách <%= book.title %>">
+        </a>
+        <div class="book-card-body">
+          <h3><a href="/books/<%= book.id %>"><%= book.title %></a></h3>
+          <p><%= book.author %></p>
+          <span>★ <%= Number(book.average_rating || 0).toFixed(1) %>/5.0 · <%= book.comment_count %> nhận xét</span>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('../partials/popup', { book: books[2] || null }) %>
+
+<%- include('../partials/footer') %>

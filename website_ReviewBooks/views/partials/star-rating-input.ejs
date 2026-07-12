@@ -1,0 +1,11 @@
+<%
+  const _idPrefix = locals.idPrefix || '';
+  const _selected = locals.selected ? Number(locals.selected) : null;
+%>
+<fieldset class="star-input" data-star-input>
+  <legend class="sr-only">Điểm đánh giá</legend>
+  <% for (let i = 5; i >= 1; i--) { %>
+    <input type="radio" id="<%= _idPrefix %>star<%= i %>" name="rating" value="<%= i %>" <%= _selected === i ? 'checked' : '' %> required>
+    <label for="<%= _idPrefix %>star<%= i %>">&#9733;</label>
+  <% } %>
+</fieldset>

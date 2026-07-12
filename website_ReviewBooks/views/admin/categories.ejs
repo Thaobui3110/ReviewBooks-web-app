@@ -1,0 +1,44 @@
+<%- include('../partials/admin-header') %>
+
+<h1>Quản lý thể loại <span class="badge badge-muted"><%= categories.length %> thể loại</span></h1>
+
+<% if (error) { %>
+  <div class="alert alert-error"><%= error %></div>
+<% } %>
+
+<div class="card card-pad" style="margin-bottom: var(--space-6);">
+  <h3>Thêm thể loại mới</h3>
+  <form method="POST" action="/admin/categories/create" class="form-row form-row-2" data-validate-form novalidate>
+    <div class="field" style="margin-bottom:0;">
+      <label for="name">Tên thể loại</label>
+      <input type="text" id="name" name="name" required minlength="2" maxlength="80">
+    </div>
+    <button class="btn btn-primary" type="submit" style="align-self:end;">Thêm</button>
+  </form>
+</div>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th>Tên thể loại</th><th>Số sách</th><th>Thao tác</th></tr>
+    </thead>
+    <tbody>
+      <% categories.forEach((cat) => { %>
+        <tr>
+          <td><%= cat.name %></td>
+          <td><span class="badge badge-muted"><%= cat.book_count %> sách</span></td>
+          <td>
+            <div class="row-actions">
+              <a class="btn btn-outline btn-sm" href="/admin/categories/<%= cat.id %>/edit">Sửa</a>
+              <form class="inline-form" method="POST" action="/admin/categories/<%= cat.id %>/delete" data-confirm="Xóa thể loại này? Sách đang gắn tag này sẽ chỉ mất tag đó (vẫn giữ các tag thể loại khác nếu có).">
+                <button class="btn btn-danger btn-sm" type="submit">Xóa</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/admin-footer') %>

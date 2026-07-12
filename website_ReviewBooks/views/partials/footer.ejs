@@ -1,0 +1,31 @@
+</main>
+<footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h4>ReviewBooks</h4>
+        <p>Không gian đọc, đánh giá và chia sẻ cảm nhận sách dành cho người Việt yêu đọc sách.</p>
+      </div>
+      <div>
+        <h4>Khám phá</h4>
+        <ul>
+          <li><a href="/books">Sách</a></li>
+          <li><a href="/reviews">Tất cả bình luận</a></li>
+          <li><a href="/contact">Giới thiệu &amp; liên hệ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <ul>
+          <li><a href="/contact">Gửi góp ý</a></li>
+          <% if (currentUser && currentUser.role === 'admin') { %>
+            <li><a href="/admin/dashboard">Trang quản trị</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; <%= new Date().getFullYear() %> ReviewBooks &mdash; Bài tập lớn Lập trình Web và Ứng dụng Di động.
+    </div>
+</footer>
+</body>
+</html>

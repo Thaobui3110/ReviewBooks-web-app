@@ -1,0 +1,48 @@
+<%- include('../partials/admin-header') %>
+
+<h1>Tổng quan quản trị</h1>
+<p>Theo dõi lượt truy cập và số liệu chính của website.</p>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="value"><%= stats.total_views %></div>
+    <div class="label">Tổng lượt xem</div>
+  </div>
+  <div class="stat-card">
+    <div class="value"><%= bookCount.total %></div>
+    <div class="label">Sách</div>
+  </div>
+  <div class="stat-card">
+    <div class="value"><%= authorCount.total %></div>
+    <div class="label">Tác giả</div>
+  </div>
+  <div class="stat-card">
+    <div class="value"><%= categoryCount.total %></div>
+    <div class="label">Thể loại</div>
+  </div>
+  <div class="stat-card">
+    <div class="value"><%= userCount.total %></div>
+    <div class="label">Người dùng</div>
+  </div>
+  <div class="stat-card">
+    <div class="value"><%= commentCount.total %></div>
+    <div class="label">Bình luận</div>
+  </div>
+  <div class="stat-card">
+    <div class="value"><%= contactCount.total %></div>
+    <div class="label">Liên hệ</div>
+  </div>
+</div>
+
+<div class="card card-pad">
+  <h3>Thao tác nhanh</h3>
+  <div class="hero-actions" style="justify-content:flex-start;">
+    <a class="btn btn-primary" href="/admin/books/create">+ Thêm sách</a>
+    <a class="btn btn-outline" href="/admin/authors">Quản lý tác giả</a>
+    <a class="btn btn-outline" href="/admin/categories">Quản lý thể loại</a>
+    <a class="btn btn-outline" href="/admin/comments">Kiểm duyệt bình luận</a>
+    <a class="btn btn-outline" href="/admin/users">Quản lý người dùng</a>
+  </div>
+</div>
+
+<%- include('../partials/admin-footer') %>

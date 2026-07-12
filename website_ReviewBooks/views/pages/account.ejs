@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+<div class="account-shell">
+  <a class="back-link" href="/">&larr; Về trang chủ</a>
+
+  <div class="card card-pad" style="margin-bottom: var(--space-6);">
+    <h1>Thông tin tài khoản</h1>
+    <form method="POST" action="/account/profile" data-validate-form novalidate>
+      <div class="account-row">
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" id="username" name="username" required minlength="3" maxlength="50" pattern="[a-zA-Z0-9_]+" value="<%= currentUser.username %>">
+      </div>
+      <div class="account-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" value="<%= currentUser.email %>" disabled>
+      </div>
+      <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+    </form>
+  </div>
+
+  <div class="card card-pad">
+    <h3>Đổi mật khẩu</h3>
+    <form method="POST" action="/account/password" data-validate-form novalidate>
+      <div class="account-row">
+        <label for="currentPassword">Mật khẩu hiện tại</label>
+        <input type="password" id="currentPassword" name="currentPassword" required minlength="6">
+      </div>
+      <div class="account-row">
+        <label for="newPassword">Mật khẩu mới</label>
+        <input type="password" id="newPassword" name="newPassword" required minlength="6">
+      </div>
+      <div class="account-row">
+        <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+      </div>
+      <button class="btn btn-primary" type="submit">Đổi mật khẩu</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<%- include('../partials/footer') %>

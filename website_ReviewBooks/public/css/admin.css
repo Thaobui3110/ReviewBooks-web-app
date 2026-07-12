@@ -1,0 +1,126 @@
+/* Admin panel */
+
+/* Thanh nav quản trị dùng chung .site-header/.logo-pill/.header-actions/.small-button
+   với nav công khai (định nghĩa trong layout.css) để đồng bộ logo, font, màu nền,
+   kiểu nút — chỉ thêm nhãn "Quản trị" cạnh logo để phân biệt khu vực. */
+.admin-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 999px;
+  color: rgba(251, 248, 240, .78);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.admin-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+@media (min-width: 800px) {
+  .admin-container { padding: 0 var(--space-6); }
+}
+
+.admin-sidebar {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  height: fit-content;
+}
+@media (min-width: 800px) {
+  .admin-sidebar {
+    position: sticky;
+    top: calc(82px + var(--space-6));
+    max-height: calc(100vh - 82px - var(--space-6) * 2);
+    overflow-y: auto;
+  }
+}
+.admin-sidebar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.admin-sidebar a {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+.admin-sidebar a:hover, .admin-sidebar a.is-active {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-hover);
+}
+
+.author-avatar-sm {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.stat-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: var(--space-8);
+}
+@media (min-width: 800px) {
+  .stat-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1200px) {
+  .stat-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+}
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+.stat-card .value { font-size: 1.6rem; font-weight: 700; }
+.stat-card .label { color: var(--color-text-muted); font-size: var(--text-xs); }
+
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.inline-form { display: inline; }
+
+.admin-filter-bar {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr;
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+@media (min-width: 800px) {
+  .admin-filter-bar.cols-2 { grid-template-columns: 2fr 1fr auto; align-items: end; }
+  .admin-filter-bar.cols-3 { grid-template-columns: 2fr 1fr 1fr auto; align-items: end; }
+  .admin-filter-bar.cols-4 { grid-template-columns: 2fr 1fr 1fr 1fr auto; align-items: end; }
+  .admin-filter-bar.create-user-grid { grid-template-columns: 1.3fr 1.3fr max-content .65fr auto; align-items: end; }
+  .admin-filter-bar.create-user-grid select { width: auto; }
+}
+.admin-filter-bar .field { margin-bottom: 0; }
+.admin-filter-bar .filter-actions { display: flex; gap: var(--space-2); }
+
+/* Form đặt trong .card-pad (vd. "Tạo tài khoản mới") đã có khung/nền của card bao
+   ngoài rồi, nên bỏ khung riêng của .admin-filter-bar để tránh khung lồng khung. */
+.card-pad > .admin-filter-bar {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 0;
+}

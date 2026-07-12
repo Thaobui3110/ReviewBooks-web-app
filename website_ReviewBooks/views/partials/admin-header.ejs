@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> | Quản trị ReviewBooks</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo-pill" href="/admin/dashboard">
+    <img src="/images/logo.svg" alt="">
+    <span class="logo-text">ReviewBooks</span>
+  </a>
+  <span class="admin-tag">Quản trị</span>
+
+  <div class="header-actions">
+    <a class="small-button" href="/">Xem trang người dùng</a>
+    <form action="/logout" method="POST">
+      <button class="small-button" type="submit">Đăng xuất</button>
+    </form>
+  </div>
+</header>
+<main>
+  <div class="admin-container admin-layout">
+    <aside class="admin-sidebar">
+      <ul>
+        <li><a class="<%= currentPath === '/admin/dashboard' ? 'is-active' : '' %>" href="/admin/dashboard">Tổng quan</a></li>
+        <li><a class="<%= currentPath.startsWith('/admin/books') ? 'is-active' : '' %>" href="/admin/books">Sách</a></li>
+        <li><a class="<%= currentPath.startsWith('/admin/authors') ? 'is-active' : '' %>" href="/admin/authors">Tác giả</a></li>
+        <li><a class="<%= currentPath.startsWith('/admin/categories') ? 'is-active' : '' %>" href="/admin/categories">Thể loại</a></li>
+        <li><a class="<%= currentPath.startsWith('/admin/users') ? 'is-active' : '' %>" href="/admin/users">Người dùng</a></li>
+        <li><a class="<%= currentPath.startsWith('/admin/comments') ? 'is-active' : '' %>" href="/admin/comments">Bình luận</a></li>
+        <li><a class="<%= currentPath.startsWith('/admin/contacts') ? 'is-active' : '' %>" href="/admin/contacts">Liên hệ</a></li>
+      </ul>
+    </aside>
+    <div>
+      <%- include('flash') %>

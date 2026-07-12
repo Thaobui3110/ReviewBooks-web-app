@@ -1,0 +1,84 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+<div class="explore-layout">
+  <aside class="explore-sidebar">
+    <h3>Thể loại</h3>
+    <ul class="sidebar-list">
+      <li>
+        <a class="<%= !category ? 'is-active' : '' %>" href="<%= buildCategoryUrl('') %>">Tất cả</a>
+      </li>
+      <% categories.forEach((cat) => { %>
+        <li>
+          <a class="<%= category === cat.name ? 'is-active' : '' %>" href="<%= buildCategoryUrl(cat.name) %>">
+            <%= cat.name %>
+            <span class="sidebar-count"><%= cat.book_count %></span>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </aside>
+
+  <div class="explore-main">
+    <div class="section-heading">
+      <h1>Khám phá</h1>
+    </div>
+
+    <form class="filter-bar" method="GET" action="/books">
+      <div class="field" style="margin-bottom:0;">
+        <label for="search">Tìm kiếm</label>
+        <input type="search" id="search" name="search" placeholder="Tên sách, tác giả..." value="<%= search %>">
+      </div>
+      <div class="field mobile-category-field" style="margin-bottom:0;">
+        <label for="category">Thể loại</label>
+        <select id="category" name="category">
+          <option value="" <%= !category ? 'selected' : '' %>>Tất cả</option>
+          <% categories.forEach((cat) => { %>
+            <option value="<%= cat.name %>" <%= category === cat.name ? 'selected' : '' %>><%= cat.name %> (<%= cat.book_count %>)</option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label for="sort">Sắp xếp</label>
+        <select id="sort" name="sort">
+          <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>Mới nhất</option>
+          <option value="rating" <%= sort === 'rating' ? 'selected' : '' %>>Đánh giá cao</option>
+          <option value="title" <%= sort === 'title' ? 'selected' : '' %>>Tên A-Z</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit">Lọc</button>
+    </form>
+
+    <% if (books.length === 0) { %>
+      <div class="empty-state">Không tìm thấy sách phù hợp. Hãy thử từ khóa hoặc thể loại khác.</div>
+    <% } else { %>
+      <div class="grid grid-books">
+        <% books.forEach((book) => { %>
+          <% const bookHref = `/books/${book.id}?back=${encodeURIComponent(currentListUrl)}`; %>
+          <article class="book-card">
+            <a class="book-card-cover" href="<%= bookHref %>">
+              <img src="<%= book.cover_image %>" alt="Bìa sách <%= book.title %>" loading="lazy">
+            </a>
+            <div class="book-card-body">
+              <div class="tag-row">
+                <% book.tags.forEach((tag) => { %>
+                  <span class="badge"><%= tag.name %></span>
+                <% }) %>
+              </div>
+              <h3><a href="<%= bookHref %>"><%= book.title %></a></h3>
+              <p class="book-card-author"><%= book.author %></p>
+              <div class="book-card-meta">
+                <%- include('../partials/star-rating-display', { value: book.average_rating, count: book.comment_count }) %>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+
+      <%- include('../partials/pagination') %>
+    <% } %>
+  </div>
+</div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,23 @@
+<%- include('../partials/admin-header') %>
+
+<h1>Sửa thể loại</h1>
+
+<% if (error) { %>
+  <div class="alert alert-error"><%= error %></div>
+<% } %>
+
+<div class="card card-pad">
+  <form method="POST" action="/admin/categories/<%= category.id %>/edit" data-validate-form novalidate>
+    <div class="field">
+      <label for="name">Tên thể loại</label>
+      <input type="text" id="name" name="name" required minlength="2" maxlength="80" value="<%= category.name || '' %>">
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+      <a class="btn btn-outline" href="/admin/categories">Hủy</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/admin-footer') %>

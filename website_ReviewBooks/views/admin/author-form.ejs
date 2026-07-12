@@ -1,0 +1,34 @@
+<%- include('../partials/admin-header') %>
+
+<h1><%= mode === 'create' ? 'Thêm tác giả' : 'Sửa tác giả' %></h1>
+
+<% if (error) { %>
+  <div class="alert alert-error"><%= error %></div>
+<% } %>
+
+<div class="card card-pad">
+  <form method="POST" action="<%= mode === 'create' ? '/admin/authors/create' : `/admin/authors/${author.id}/edit` %>" data-validate-form novalidate>
+    <div class="form-row form-row-2">
+      <div class="field">
+        <label for="name">Tên tác giả</label>
+        <input type="text" id="name" name="name" required minlength="2" maxlength="150" value="<%= author.name || '' %>">
+      </div>
+      <div class="field">
+        <label for="avatar">Đường dẫn ảnh đại diện</label>
+        <input type="text" id="avatar" name="avatar" placeholder="/images/authors/default-author.svg" value="<%= author.avatar || '' %>">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="bio">Tiểu sử / giới thiệu</label>
+      <textarea id="bio" name="bio" maxlength="3000"><%= author.bio || '' %></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit"><%= mode === 'create' ? 'Thêm tác giả' : 'Lưu thay đổi' %></button>
+      <a class="btn btn-outline" href="/admin/authors">Hủy</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/admin-footer') %>

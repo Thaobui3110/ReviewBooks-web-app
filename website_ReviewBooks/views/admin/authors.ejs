@@ -1,0 +1,46 @@
+<%- include('../partials/admin-header') %>
+
+<div class="admin-toolbar">
+  <h1 style="margin:0;">Quản lý tác giả <span class="badge badge-muted"><%= pagination.totalItems %> tác giả</span></h1>
+  <a class="btn btn-primary" href="/admin/authors/create">+ Thêm tác giả</a>
+</div>
+
+<form class="admin-filter-bar cols-2" method="GET" action="/admin/authors">
+  <div class="field">
+    <label for="search">Tìm theo tên tác giả</label>
+    <input type="search" id="search" name="search" placeholder="Nhập từ khoá..." value="<%= search %>">
+  </div>
+  <div class="filter-actions">
+    <button class="btn btn-primary" type="submit">Tìm</button>
+    <a class="btn btn-outline" href="/admin/authors">Xóa lọc</a>
+  </div>
+</form>
+
+<div class="table-wrap">
+  <table class="data-table">
+    <thead>
+      <tr><th></th><th>Tên tác giả</th><th>Số sách</th><th>Thao tác</th></tr>
+    </thead>
+    <tbody>
+      <% authors.forEach((author) => { %>
+        <tr>
+          <td><img class="author-avatar-sm" src="<%= author.avatar %>" alt="Ảnh <%= author.name %>"></td>
+          <td class="wrap"><%= author.name %></td>
+          <td><span class="badge badge-muted"><%= author.book_count %> sách</span></td>
+          <td>
+            <div class="row-actions">
+              <a class="btn btn-outline btn-sm" href="/admin/authors/<%= author.id %>/edit">Sửa</a>
+              <form class="inline-form" method="POST" action="/admin/authors/<%= author.id %>/delete" data-confirm="Xóa tác giả này? Chỉ xóa được nếu không còn sách nào gắn với tác giả.">
+                <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/pagination') %>
+
+<%- include('../partials/admin-footer') %>

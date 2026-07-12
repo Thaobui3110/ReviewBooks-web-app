@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+<div class="auth-shell">
+  <div class="card card-pad">
+    <h1>Đăng nhập</h1>
+    <p style="text-align:center;">Đăng nhập để bình luận, đánh giá và quản lý tài khoản của bạn.</p>
+
+    <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/login" data-validate-form novalidate>
+      <input type="hidden" name="next" value="<%= next %>">
+      <div class="field">
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" id="username" name="username" required minlength="3" autofocus>
+      </div>
+      <div class="field">
+        <label for="password">Mật khẩu</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Đăng nhập</button>
+    </form>
+
+    <p class="auth-switch">Chưa có tài khoản? <a href="/register">Đăng ký ngay</a></p>
+  </div>
+</div>
+</div>
+
+<%- include('../partials/footer') %>

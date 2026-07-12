@@ -1,0 +1,177 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+<a class="back-link" href="<%= backUrl %>">&larr; Quay lại Khám phá</a>
+<div class="two-col">
+  <div class="book-detail-cover">
+    <img src="<%= book.cover_image %>" alt="Bìa sách <%= book.title %>">
+
+    <div class="book-info-panel">
+      <h3>Thông tin chi tiết</h3>
+      <dl class="info-list">
+        <div class="info-row">
+          <dt>Tác giả</dt>
+          <dd><%= book.author %></dd>
+        </div>
+        <% if (book.translator) { %>
+          <div class="info-row">
+            <dt>Người dịch</dt>
+            <dd><%= book.translator %></dd>
+          </div>
+        <% } %>
+        <div class="info-row">
+          <dt>Ngôn ngữ gốc</dt>
+          <dd><%= book.language || 'Chưa cập nhật' %></dd>
+        </div>
+        <div class="info-row">
+          <dt>Năm xuất bản đầu tiên</dt>
+          <dd><%= book.publish_year || 'Chưa cập nhật' %></dd>
+        </div>
+        <div class="info-row">
+          <dt>Số trang</dt>
+          <dd><%= book.page_count ? `${book.page_count} trang` : 'Chưa cập nhật' %></dd>
+        </div>
+        <div class="info-row">
+          <dt>Nhà xuất bản</dt>
+          <dd><%= book.publisher || 'Chưa cập nhật' %></dd>
+        </div>
+      </dl>
+    </div>
+
+    <% if (relatedBooks && relatedBooks.length) { %>
+      <div class="related-panel">
+        <h3>Bạn có thể thích</h3>
+        <div class="related-grid">
+          <% relatedBooks.forEach((rb) => { %>
+            <a class="related-card" href="/books/<%= rb.id %>?back=<%= encodeURIComponent(backUrl) %>">
+              <img src="<%= rb.cover_image %>" alt="Bìa sách <%= rb.title %>" loading="lazy">
+              <span class="related-title"><%= rb.title %></span>
+            </a>
+          <% }) %>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+  <div>
+    <% (book.tags || []).forEach((tag) => { %>
+      <span class="badge"><%= tag.name %></span>
+    <% }) %>
+    <h1 class="book-detail-title"><%= book.title %></h1>
+    <p class="book-detail-author">Tác giả: <%= book.author %></p>
+    <div class="book-detail-meta">
+      <%- include('../partials/star-rating-display', { value: rating.average_rating, count: rating.total }) %>
+    </div>
+
+    <div class="content-block">
+      <h3>Giới thiệu</h3>
+      <p><%= book.description %></p>
+    </div>
+
+    <div class="content-block">
+      <h3>Về tác giả</h3>
+      <div class="author-card">
+        <img class="author-avatar" src="<%= book.author_avatar %>" alt="Ảnh tác giả <%= book.author %>">
+        <div>
+          <p class="author-name"><%= book.author %></p>
+          <p class="author-bio"><%= book.author_bio || 'Chưa có thông tin giới thiệu về tác giả này.' %></p>
+        </div>
+      </div>
+    </div>
+
+    <% if (book.review_content) { %>
+      <div class="content-block">
+        <h3>Nhận xét từ đội ngũ ReviewBooks</h3>
+        <p><%= book.review_content %></p>
+      </div>
+    <% } %>
+
+    <div class="content-block" id="reviews">
+      <h3>Đánh giá và bình luận</h3>
+
+      <div class="card card-pad review-form-card">
+        <h4>Viết đánh giá của bạn</h4>
+        <% if (currentUser) { %>
+          <form method="POST" action="/books/<%= book.id %>/comments" data-validate-form novalidate>
+            <input type="hidden" name="back" value="<%= backUrl %>">
+            <p class="hint">Bình luận với tư cách <strong><%= currentUser.username %></strong> (<%= currentUser.email %>)</p>
+
+            <div class="field rating-field">
+              <label>Điểm đánh giá</label>
+              <%- include('../partials/star-rating-input') %>
+            </div>
+
+            <div class="field">
+              <label for="content">Nội dung bình luận</label>
+              <textarea id="content" name="content" required minlength="5" maxlength="2000" placeholder="Chia sẻ cảm nhận của bạn về cuốn sách này..."></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Gửi đánh giá</button>
+          </form>
+        <% } else { %>
+          <p>Vui lòng <a href="/login?next=/books/<%= book.id %>%23reviews">đăng nhập</a> để bình luận và đánh giá.</p>
+        <% } %>
+      </div>
+
+      <div class="community-reviews">
+        <h4>Đánh giá của cộng đồng (<%= comments.length %>)</h4>
+        <% if (comments.length === 0) { %>
+          <div class="empty-state">Chưa có bình luận nào cho sách này. Hãy là người đầu tiên!</div>
+        <% } else { %>
+          <div class="card card-pad">
+            <% comments.forEach((comment) => { %>
+              <div class="review-item">
+                <div class="review-item-head">
+                  <span class="review-item-name">
+                    <%= comment.username || comment.name %>
+                    <span class="review-item-email">(<%= comment.email %>)</span>
+                  </span>
+
+                  <% if (currentUser && String(comment.user_id) === String(currentUser.id)) { %>
+                    <div class="comment-menu" data-comment-menu>
+                      <button type="button" class="comment-menu-btn" data-comment-menu-toggle aria-haspopup="true" aria-expanded="false" aria-label="Tùy chọn bình luận">&#8943;</button>
+                      <div class="comment-menu-dropdown" data-comment-menu-dropdown hidden>
+                        <button type="button" class="comment-menu-item" data-comment-edit-toggle>Chỉnh sửa</button>
+                        <form method="POST" action="/books/<%= book.id %>/comments/<%= comment.id %>/delete" data-confirm="Xóa bình luận này?">
+                          <input type="hidden" name="back" value="<%= backUrl %>">
+                          <button type="submit" class="comment-menu-item comment-menu-item-danger">Xóa</button>
+                        </form>
+                      </div>
+                    </div>
+                  <% } %>
+                </div>
+
+                <div class="review-item-meta">
+                  <span class="review-item-date"><%= new Date(comment.created_at).toLocaleTimeString('vi-VN') %> &middot; <%= new Date(comment.created_at).toLocaleDateString('vi-VN') %></span>
+                  <%- include('../partials/star-rating-display', { value: comment.rating }) %>
+                </div>
+
+                <p style="margin-top: var(--space-2);"><%= comment.content %></p>
+
+                <% if (currentUser && String(comment.user_id) === String(currentUser.id)) { %>
+                  <form class="comment-edit-form" data-comment-edit-form hidden method="POST" action="/books/<%= book.id %>/comments/<%= comment.id %>/edit" data-validate-form novalidate>
+                    <input type="hidden" name="back" value="<%= backUrl %>">
+                    <div class="field rating-field">
+                      <label>Điểm đánh giá</label>
+                      <%- include('../partials/star-rating-input', { idPrefix: `edit-${comment.id}-`, selected: comment.rating }) %>
+                    </div>
+                    <div class="field">
+                      <textarea name="content" required minlength="5" maxlength="2000"><%= comment.content %></textarea>
+                    </div>
+                    <div class="comment-edit-form-actions">
+                      <button type="button" class="btn btn-outline btn-sm" data-comment-edit-cancel>Hủy</button>
+                      <button type="submit" class="btn btn-primary btn-sm">Lưu thay đổi</button>
+                    </div>
+                  </form>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+<div class="section-heading">
+  <h1>Tất cả bình luận</h1>
+  <p>Những cảm nhận mới nhất từ cộng đồng độc giả ReviewBooks.</p>
+</div>
+
+<% if (reviews.length === 0) { %>
+  <div class="empty-state">Chưa có bình luận nào.</div>
+<% } else { %>
+  <div class="card card-pad">
+    <% reviews.forEach((review) => { %>
+      <div class="reviews-feed-item">
+        <img src="<%= review.book_cover_image %>" alt="Bìa sách <%= review.book_title %>">
+        <div>
+          <div class="review-item-head">
+            <div>
+              <a href="/books/<%= review.book_id %>#reviews"><strong><%= review.book_title %></strong></a>
+              <span class="review-item-date"> &middot; <%= review.book_author %></span>
+            </div>
+            <%- include('../partials/star-rating-display', { value: review.rating }) %>
+          </div>
+          <div class="review-item-head">
+            <span class="review-item-name">
+              <%= review.username || review.name %>
+              <span class="review-item-email">(<%= review.email %>)</span>
+            </span>
+            <span class="review-item-date"><%= new Date(review.created_at).toLocaleTimeString('vi-VN') %> &middot; <%= new Date(review.created_at).toLocaleDateString('vi-VN') %></span>
+          </div>
+          <p style="margin-top: var(--space-2); margin-bottom: 0;"><%= review.content %></p>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <%- include('../partials/pagination') %>
+<% } %>
+</div>
+
+<%- include('../partials/footer') %>
