@@ -71,9 +71,28 @@ async function listAllPaginated({ search = '', sort = 'newest', page, perPage = 
   return { comments, pagination };
 }
 
-async function listReviewsFeed({ page, perPage = 8 }) {
-  const [[countRow]] = await db.query('SELECT COUNT(*) AS total FROM comments');
+async function listReviewsFeed({ search = '', sort = 'newest', page, perPage = 8 }) {
+  let whereSql = 'WHERE 1 = 1';
+  const params = [];
+
+  if (search) {
+    whereSql += ' AND (b.title LIKE ? OR c.name LIKE ? OR u.username LIKE ? OR c.content LIKE ?)';
+    params.push(`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`);
+  }
+
+  const [[countRow]] = await db.query(`
+    SELECT COUNT(*) AS total
+    FROM comments c
+    INNER JOIN books b ON b.id = c.book_id
+    LEFT JOIN users u ON u.id = c.user_id
+    ${whereSql}
+  `, params);
   const pagination = paginate({ page, totalItems: countRow.total, perPage });
+
+  let orderSql = 'ORDER BY c.created_at DESC, c.id ASC';
+  if (sort === 'oldest') orderSql = 'ORDER BY c.created_at ASC, c.id ASC';
+  else if (sort === 'rating_high') orderSql = 'ORDER BY c.rating DESC, c.created_at DESC, c.id ASC';
+  else if (sort === 'rating_low') orderSql = 'ORDER BY c.rating ASC, c.created_at DESC, c.id ASC';
 
   const [reviews] = await db.query(`
     SELECT
@@ -84,9 +103,10 @@ async function listReviewsFeed({ page, perPage = 8 }) {
     INNER JOIN books b ON b.id = c.book_id
     JOIN authors a ON a.id = b.author_id
     LEFT JOIN users u ON u.id = c.user_id
-    ORDER BY c.created_at DESC, c.id ASC
+    ${whereSql}
+    ${orderSql}
     LIMIT ? OFFSET ?
-  `, [pagination.perPage, pagination.offset]);
+  `, [...params, pagination.perPage, pagination.offset]);
 
   return { reviews, pagination };
 }

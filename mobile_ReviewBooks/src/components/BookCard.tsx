@@ -9,12 +9,13 @@ import { spacing } from '../theme/spacing';
 interface BookCardProps {
   book: Book;
   onPress: () => void;
+  coverResizeMode?: 'cover' | 'contain';
 }
 
-export default function BookCard({ book, onPress }: BookCardProps) {
+export default function BookCard({ book, onPress, coverResizeMode = 'contain' }: BookCardProps) {
   return (
     <Pressable style={({ pressed }) => [styles.card, pressed && styles.pressed]} onPress={onPress}>
-      <Image source={{ uri: `${API_BASE_URL}${book.cover_image}` }} style={styles.cover} resizeMode="contain" />
+      <Image source={{ uri: `${API_BASE_URL}${book.cover_image}` }} style={styles.cover} resizeMode={coverResizeMode} />
       <Text style={styles.title} numberOfLines={2}>
         {book.title}
       </Text>

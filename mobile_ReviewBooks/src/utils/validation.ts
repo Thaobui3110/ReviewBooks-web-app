@@ -3,11 +3,11 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const USERNAME_RE = /^[a-zA-Z0-9_]{3,50}$/;
 
-export function isEmail(value: string): boolean {
+function isEmail(value: string): boolean {
   return EMAIL_RE.test(value.trim());
 }
 
-export function isValidUsername(value: string): boolean {
+function isValidUsername(value: string): boolean {
   return USERNAME_RE.test(value.trim());
 }
 

@@ -5,9 +5,10 @@ import { colors } from '../theme/colors';
 interface StarRatingDisplayProps {
   value: number;
   count?: number;
+  showValue?: boolean;
 }
 
-export default function StarRatingDisplay({ value, count }: StarRatingDisplayProps) {
+export default function StarRatingDisplay({ value, count, showValue = true }: StarRatingDisplayProps) {
   const rounded = Math.round(value);
   return (
     <View style={styles.row}>
@@ -18,7 +19,7 @@ export default function StarRatingDisplay({ value, count }: StarRatingDisplayPro
           </Text>
         ))}
       </View>
-      <Text style={styles.value}>{value.toFixed(1)}</Text>
+      {showValue ? <Text style={styles.value}>{value.toFixed(1)}</Text> : null}
       {typeof count === 'number' ? <Text style={styles.count}>({count})</Text> : null}
     </View>
   );

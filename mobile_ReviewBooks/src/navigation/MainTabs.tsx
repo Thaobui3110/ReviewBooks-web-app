@@ -5,6 +5,7 @@ import BookStack from './BookStack';
 import ReviewsFeedScreen from '../screens/ReviewsFeedScreen';
 import ContactScreen from '../screens/ContactScreen';
 import AccountScreen from '../screens/AccountScreen';
+import CustomTabBar from './CustomTabBar';
 import { MainTabParamList } from './types';
 import { colors } from '../theme/colors';
 
@@ -13,9 +14,8 @@ const Tab = createBottomTabNavigator<MainTabParamList>();
 export default function MainTabs() {
   return (
     <Tab.Navigator
+      tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={{
-        tabBarActiveTintColor: colors.accent,
-        tabBarInactiveTintColor: colors.textMuted,
         headerStyle: { backgroundColor: colors.surface },
         headerTintColor: colors.text,
       }}

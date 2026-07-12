@@ -18,7 +18,7 @@ export default function CommentItem({ comment, isOwn, onEdit, onDelete }: Commen
     <View style={styles.container}>
       <View style={styles.headRow}>
         <Text style={styles.name}>{comment.username ?? comment.name}</Text>
-        <StarRatingDisplay value={comment.rating} />
+        <StarRatingDisplay value={comment.rating} showValue={false} />
       </View>
       <Text style={styles.date}>{formatDate(comment.created_at)}</Text>
       <Text style={styles.content}>{comment.content}</Text>

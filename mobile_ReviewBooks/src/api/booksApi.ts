@@ -1,7 +1,7 @@
 import { apiRequest } from './client';
 import { Book, Comment, Pagination, RatingStats } from '../types';
 
-export interface ListBooksParams {
+interface ListBooksParams {
   search?: string;
   category?: string;
   sort?: 'newest' | 'rating' | 'title';

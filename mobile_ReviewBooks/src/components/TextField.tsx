@@ -5,19 +5,13 @@ import { spacing } from '../theme/spacing';
 
 interface TextFieldProps extends TextInputProps {
   label: string;
-  error?: string;
 }
 
-export default function TextField({ label, error, style, ...rest }: TextFieldProps) {
+export default function TextField({ label, style, ...rest }: TextFieldProps) {
   return (
     <View style={styles.field}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={[styles.input, error ? styles.inputError : null, style]}
-        placeholderTextColor={colors.textMuted}
-        {...rest}
-      />
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+      <TextInput style={[styles.input, style]} placeholderTextColor={colors.textMuted} {...rest} />
     </View>
   );
 }
@@ -35,6 +29,4 @@ const styles = StyleSheet.create({
     color: colors.text,
     backgroundColor: colors.surface,
   },
-  inputError: { borderColor: colors.danger },
-  error: { color: colors.danger, fontSize: 12, marginTop: spacing.xs },
 });

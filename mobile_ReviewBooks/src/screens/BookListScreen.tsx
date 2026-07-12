@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, FlatList, TextInput, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BookStackParamList } from '../navigation/types';
 import { Book } from '../types';
@@ -7,6 +7,7 @@ import * as booksApi from '../api/booksApi';
 import * as categoriesApi from '../api/categoriesApi';
 import BookCard from '../components/BookCard';
 import Dropdown from '../components/Dropdown';
+import SearchInput from '../components/SearchInput';
 import EmptyState from '../components/EmptyState';
 import InfiniteScrollFooter from '../components/InfiniteScrollFooter';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -69,14 +70,12 @@ export default function BookListScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      <TextInput
+      <SearchInput
         style={styles.search}
         placeholder="Tìm sách hoặc tác giả..."
-        placeholderTextColor={colors.textMuted}
         value={search}
         onChangeText={setSearch}
         onSubmitEditing={() => loadBooks(1, true)}
-        returnKeyType="search"
       />
 
       <View style={styles.filterRow}>
@@ -103,7 +102,11 @@ export default function BookListScreen({ navigation }: Props) {
           numColumns={2}
           contentContainerStyle={styles.listContent}
           renderItem={({ item }) => (
-            <BookCard book={item} onPress={() => navigation.navigate('BookDetail', { bookId: item.id })} />
+            <BookCard
+              book={item}
+              coverResizeMode="cover"
+              onPress={() => navigation.navigate('BookDetail', { bookId: item.id })}
+            />
           )}
           ListEmptyComponent={<EmptyState text="Không tìm thấy sách phù hợp." />}
           onEndReached={handleEndReached}
@@ -117,16 +120,7 @@ export default function BookListScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bg },
-  search: {
-    margin: spacing.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 8,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    backgroundColor: colors.surface,
-    color: colors.text,
-  },
+  search: { margin: spacing.md },
   filterRow: { flexDirection: 'row', gap: spacing.sm, marginHorizontal: spacing.md, marginBottom: spacing.md },
   filterHalf: { flex: 1 },
   listContent: { paddingHorizontal: spacing.xs, paddingBottom: spacing.xxl },

@@ -6,8 +6,25 @@
   <p>Những cảm nhận mới nhất từ cộng đồng độc giả ReviewBooks.</p>
 </div>
 
+<form class="filter-bar" method="GET" action="/reviews">
+  <div class="field" style="margin-bottom:0;">
+    <label for="search">Tìm kiếm</label>
+    <input type="search" id="search" name="search" placeholder="Tên người đánh giá, tên sách, nội dung..." value="<%= search %>">
+  </div>
+  <div class="field" style="margin-bottom:0;">
+    <label for="sort">Sắp xếp</label>
+    <select id="sort" name="sort">
+      <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>Mới nhất</option>
+      <option value="oldest" <%= sort === 'oldest' ? 'selected' : '' %>>Cũ nhất</option>
+      <option value="rating_high" <%= sort === 'rating_high' ? 'selected' : '' %>>Đánh giá cao</option>
+      <option value="rating_low" <%= sort === 'rating_low' ? 'selected' : '' %>>Đánh giá thấp</option>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Lọc</button>
+</form>
+
 <% if (reviews.length === 0) { %>
-  <div class="empty-state">Chưa có bình luận nào.</div>
+  <div class="empty-state">Không tìm thấy bình luận phù hợp.</div>
 <% } else { %>
   <div class="card card-pad">
     <% reviews.forEach((review) => { %>

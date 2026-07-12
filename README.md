@@ -26,7 +26,7 @@ Mở MySQL Workbench (hoặc công cụ quản lý MySQL bất kỳ), kết nố
 ```
 website_ReviewBooks/sql/database.sql
 ```
-File này tự tạo database `review_books_v2` và chèn sẵn dữ liệu mẫu (sách, tác giả, tài khoản...). Không cần tạo database thủ công trước.
+File này tự tạo database `review_books` và chèn sẵn dữ liệu mẫu (sách, tác giả, tài khoản...). Không cần tạo database thủ công trước.
 
 ### Bước 2 — Cấu hình kết nối
 ```
@@ -89,10 +89,7 @@ npx expo start
 ```
 Quét mã QR hiện ra bằng app **Expo Go** trên điện thoại.
 
-**Xem nhanh giao diện trên trình duyệt** (không test được đầy đủ vì không phải môi trường di động thật):
-```
-npm run web
-```
+> Ứng dụng chỉ target di động (Android/iOS qua Expo Go), không hỗ trợ chạy trên trình duyệt — đúng phạm vi đề bài (chỉ cần demo qua Expo Go), không kéo thêm kỹ thuật/dependency ngoài phạm vi các slide môn học.
 
 ### Nếu test bằng điện thoại thật mà không gọi được API
 Windows Firewall mặc định chặn thiết bị khác trong mạng LAN gọi vào cổng 3001. Mở PowerShell **với quyền Administrator**, chạy 1 lần duy nhất:
@@ -106,7 +103,7 @@ New-NetFirewallRule -DisplayName 'ReviewBooks Dev API 3001' -Direction Inbound -
 
 1. Đảm bảo MySQL Server đang chạy.
 2. Terminal 1: `cd website_ReviewBooks` → `npm start`
-3. Terminal 2: `cd mobile_ReviewBooks` → `npm run android` (hoặc `npx expo start`, hoặc `npm run web`)
+3. Terminal 2: `cd mobile_ReviewBooks` → `npm run android` (hoặc `npx expo start` rồi quét mã QR bằng Expo Go)
 
 ---
 

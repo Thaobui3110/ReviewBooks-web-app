@@ -63,11 +63,15 @@ router.get('/books', async (req, res, next) => {
 
 router.get('/reviews', async (req, res, next) => {
   try {
-    const { reviews, pagination } = await commentService.listReviewsFeed({ page: req.query.page, perPage: 8 });
+    const search = (req.query.search || '').trim();
+    const sort = req.query.sort || 'newest';
+    const { reviews, pagination } = await commentService.listReviewsFeed({ search, sort, page: req.query.page, perPage: 8 });
     res.render('pages/reviews', {
       title: 'Tất cả bình luận',
       reviews,
       pagination,
+      search,
+      sort,
       buildPageUrl: (page) => buildPageUrl(req, page)
     });
   } catch (err) {
