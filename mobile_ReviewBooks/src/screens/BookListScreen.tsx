@@ -102,11 +102,7 @@ export default function BookListScreen({ navigation }: Props) {
           numColumns={2}
           contentContainerStyle={styles.listContent}
           renderItem={({ item }) => (
-            <BookCard
-              book={item}
-              coverResizeMode="cover"
-              onPress={() => navigation.navigate('BookDetail', { bookId: item.id })}
-            />
+            <BookCard book={item} onPress={() => navigation.navigate('BookDetail', { bookId: item.id })} />
           )}
           ListEmptyComponent={<EmptyState text="Không tìm thấy sách phù hợp." />}
           onEndReached={handleEndReached}
