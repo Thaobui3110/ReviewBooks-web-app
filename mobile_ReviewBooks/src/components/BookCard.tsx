@@ -1,3 +1,4 @@
+// Thẻ sách (ảnh bìa + tên + tác giả + sao) dùng ở Trang chủ và Book List
 import React from 'react';
 import { Text, Image, Pressable, StyleSheet } from 'react-native';
 import { Book } from '../types';

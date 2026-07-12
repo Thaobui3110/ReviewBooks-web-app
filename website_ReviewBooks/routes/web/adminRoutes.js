@@ -1,3 +1,4 @@
+// Route EJS cho khu vực quản trị /admin/*
 const express = require('express');
 const adminOnly = require('../../middleware/adminOnly');
 const { buildPageUrl } = require('../../utils/pagination');

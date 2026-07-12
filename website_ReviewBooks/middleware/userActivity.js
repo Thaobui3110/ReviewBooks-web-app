@@ -1,3 +1,4 @@
+// Cập nhật last_seen_at của user đang đăng nhập trên mỗi request
 const authService = require('../services/authService');
 
 module.exports = async function userActivity(req, res, next) {

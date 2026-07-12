@@ -1,3 +1,4 @@
+// Feed toàn bộ bình luận, hỗ trợ tìm kiếm + sắp xếp
 import { apiRequest } from './client';
 import { Review, Pagination } from '../types';
 

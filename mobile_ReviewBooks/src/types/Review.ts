@@ -1,3 +1,4 @@
+// Kiểu dữ liệu đánh giá dùng ở trang "Tất cả đánh giá"
 export interface Review {
   id: number;
   book_id: number;

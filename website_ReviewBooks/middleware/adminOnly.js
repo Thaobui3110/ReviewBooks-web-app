@@ -1,3 +1,4 @@
+// Chặn route chỉ dành cho admin, redirect nếu chưa đăng nhập hoặc không đủ quyền
 function adminOnly(req, res, next) {
   if (!req.session.user) {
     return res.redirect('/login?next=' + encodeURIComponent(req.originalUrl));

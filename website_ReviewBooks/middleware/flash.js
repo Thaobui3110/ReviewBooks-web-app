@@ -1,3 +1,4 @@
+// Thông báo 1 lần (flash message) lưu qua session, hiện ra sau redirect
 function setFlash(req, type, message) {
   req.session.flash = { type, message };
 }

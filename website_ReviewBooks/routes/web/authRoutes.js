@@ -1,3 +1,4 @@
+// Route đăng nhập/đăng ký/đăng xuất (render EJS)
 const express = require('express');
 const { validateUser } = require('../../utils/validation');
 const { safeNextUrl } = require('../../utils/safeUrl');

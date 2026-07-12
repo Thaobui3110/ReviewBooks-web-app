@@ -1,3 +1,4 @@
+// Lưu/đọc/xoá JWT token qua AsyncStorage, thay cho session cookie của web
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Key đặt đúng như ví dụ mẫu trong slide "10. Data Storage" ("user-token").

@@ -1,3 +1,4 @@
+// Nghiệp vụ lưu và liệt kê ý kiến liên hệ
 const db = require('../config/db');
 const { paginate } = require('../utils/pagination');
 

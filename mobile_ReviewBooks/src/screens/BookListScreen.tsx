@@ -1,3 +1,4 @@
+// Trang khám phá sách: tìm kiếm, lọc thể loại, sắp xếp, phân trang cuộn vô hạn
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';

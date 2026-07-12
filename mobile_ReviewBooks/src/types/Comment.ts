@@ -1,3 +1,4 @@
+// Kiểu dữ liệu bình luận/đánh giá gắn với 1 cuốn sách
 export interface Comment {
   id: number;
   book_id: number;

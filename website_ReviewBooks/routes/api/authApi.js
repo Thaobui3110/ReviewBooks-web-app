@@ -1,3 +1,4 @@
+// API đăng ký/đăng nhập/đăng xuất, xem/sửa tài khoản
 const express = require('express');
 const { validateUser, validateProfileUpdate, validatePasswordChange } = require('../../utils/validation');
 const { requireLoginApi } = require('../../middleware/apiAuth');

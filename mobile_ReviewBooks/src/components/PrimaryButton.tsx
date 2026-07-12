@@ -1,3 +1,4 @@
+// Nút chính dùng chung, có trạng thái loading/disabled
 import React from 'react';
 import { Pressable, Text, StyleSheet, ActivityIndicator, ViewStyle } from 'react-native';
 import { colors } from '../theme/colors';

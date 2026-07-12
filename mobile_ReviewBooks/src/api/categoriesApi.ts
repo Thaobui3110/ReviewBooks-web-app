@@ -1,3 +1,4 @@
+// Danh sách thể loại
 import { apiRequest } from './client';
 
 export function listCategories() {

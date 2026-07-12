@@ -1,3 +1,4 @@
+// Chọn sao đánh giá 1-5 bằng cách chạm
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';

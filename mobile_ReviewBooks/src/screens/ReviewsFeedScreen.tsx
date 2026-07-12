@@ -1,3 +1,4 @@
+// Trang tất cả đánh giá: tìm kiếm theo tên/sách/nội dung, sắp xếp mới-cũ hoặc điểm cao-thấp
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { Review } from '../types';

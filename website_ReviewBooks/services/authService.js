@@ -1,3 +1,4 @@
+// Nghiệp vụ đăng nhập, đăng ký, cập nhật last_seen_at
 const db = require('../config/db');
 const { hashPassword, verifyPassword } = require('../utils/password');
 

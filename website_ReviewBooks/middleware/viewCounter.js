@@ -1,3 +1,4 @@
+// Tăng bộ đếm view toàn site, bỏ qua request tải css/js/ảnh
 const statsService = require('../services/statsService');
 
 async function viewCounter(req, res, next) {

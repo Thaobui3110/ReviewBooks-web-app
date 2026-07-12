@@ -5,16 +5,7 @@ DROP DATABASE IF EXISTS review_books;
 CREATE DATABASE review_books CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE review_books;
 
--- Tắt Safe Updates cho phiên chạy script này — các câu UPDATE ảnh bìa/avatar bên dưới
--- lọc theo title/name (không phải cột khoá), MySQL Workbench mặc định chặn kiểu này
--- (Error 1175) trừ khi tắt cờ này. Bật lại ở cuối file để không ảnh hưởng các câu lệnh
--- thủ công khác của bạn sau khi script chạy xong.
 SET SQL_SAFE_UPDATES = 0;
-
--- Ép phiên làm việc đọc các chuỗi literal trong file này đúng theo UTF-8 — nếu không,
--- một số client (vd. mysql CLI trên Windows chạy qua terminal dùng code page khác,
--- như CP437/latin1) sẽ đọc sai byte của chữ có dấu tiếng Việt và LƯU SAI THẬT vào DB
--- (không chỉ hiển thị sai), dù file .sql này vẫn luôn đúng UTF-8 trên đĩa.
 SET NAMES utf8mb4;
 
 CREATE TABLE users (

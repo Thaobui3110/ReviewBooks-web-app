@@ -1,3 +1,4 @@
+// Nghiệp vụ CRUD người dùng, đổi tên hiển thị/đổi mật khẩu
 const db = require('../config/db');
 const { hashPassword, verifyPassword } = require('../utils/password');
 const { paginate } = require('../utils/pagination');

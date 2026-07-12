@@ -1,3 +1,4 @@
+// Ô tìm kiếm có nút "✕" tự hiện khi có chữ để xoá nhanh
 import React from 'react';
 import { View, TextInput, Pressable, Text, StyleSheet, TextInputProps, StyleProp, ViewStyle } from 'react-native';
 import { colors } from '../theme/colors';

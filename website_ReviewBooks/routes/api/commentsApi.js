@@ -1,3 +1,4 @@
+// API feed toàn bộ bình luận (trang "Tất cả bình luận"), hỗ trợ tìm kiếm + sắp xếp
 const express = require('express');
 const commentService = require('../../services/commentService');
 

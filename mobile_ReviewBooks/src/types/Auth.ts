@@ -1,3 +1,4 @@
+// Kiểu dữ liệu cho payload đăng nhập/đăng ký và response kèm token
 import { User } from './User';
 
 export interface LoginData {

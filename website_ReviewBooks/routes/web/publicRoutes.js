@@ -1,3 +1,4 @@
+// Route công khai: trang chủ, sách, bình luận, tài khoản, liên hệ
 const express = require('express');
 const requireLogin = require('../../middleware/auth');
 const { validateContact, validateComment, validateProfileUpdate, validatePasswordChange } = require('../../utils/validation');

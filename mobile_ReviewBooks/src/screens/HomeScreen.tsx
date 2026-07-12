@@ -1,3 +1,4 @@
+// Trang chủ: banner giới thiệu và danh sách sách nổi bật
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, FlatList, ScrollView, StyleSheet } from 'react-native';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/native';

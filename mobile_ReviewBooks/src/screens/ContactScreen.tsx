@@ -1,3 +1,4 @@
+// Trang gửi ý kiến liên hệ
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { useAuth } from '../context/AuthContext';

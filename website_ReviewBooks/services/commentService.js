@@ -1,3 +1,4 @@
+// Nghiệp vụ CRUD bình luận và tính điểm đánh giá trung bình
 const db = require('../config/db');
 const { paginate } = require('../utils/pagination');
 

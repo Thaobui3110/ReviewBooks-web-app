@@ -1,3 +1,4 @@
+// Mount toàn bộ route /api/*, xác thực bằng session cookie hoặc Bearer token (JWT)
 const express = require('express');
 const { verifyToken } = require('../../utils/token');
 

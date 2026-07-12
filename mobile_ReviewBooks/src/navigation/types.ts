@@ -1,3 +1,4 @@
+// Khai báo param list cho từng navigator, phục vụ typed navigation
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type AuthStackParamList = {

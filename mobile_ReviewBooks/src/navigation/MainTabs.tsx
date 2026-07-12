@@ -1,3 +1,4 @@
+// Tab Navigator chính: Trang chủ, Sách, Đánh giá, Liên hệ, Tài khoản
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';

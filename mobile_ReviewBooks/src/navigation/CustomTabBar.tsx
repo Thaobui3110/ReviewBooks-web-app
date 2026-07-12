@@ -12,9 +12,9 @@ const TAB_LABELS: Record<string, string> = {
   Account: 'Tài khoản',
 };
 
-// Tự vẽ toàn bộ thanh tab (không dùng BottomTabBar dựng sẵn của React Navigation)
-// để chắc chắn không còn icon/placeholder mặc định nào — chỉ đúng chữ + màu nền
-// đổi khi chọn, giống hệt thanh nav của website.
+// Tự vẽ thanh tab bằng View/Text/Pressable thuần, không dùng BottomTabBar dựng
+// sẵn của React Navigation — chỉ hiện chữ, tô màu nền cho tab đang chọn, mô
+// phỏng theo thanh nav của website (public/css/layout.css .main-nav).
 export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
 

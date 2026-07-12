@@ -1,3 +1,4 @@
+// Stack lồng trong tab Sách: BookList → BookDetail
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BookListScreen from '../screens/BookListScreen';

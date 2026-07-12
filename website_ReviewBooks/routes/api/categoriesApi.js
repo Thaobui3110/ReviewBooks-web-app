@@ -1,3 +1,4 @@
+// API danh sách thể loại
 const express = require('express');
 const categoryService = require('../../services/categoryService');
 

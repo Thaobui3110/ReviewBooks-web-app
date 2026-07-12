@@ -1,3 +1,4 @@
+// Nghiệp vụ đếm view và thống kê cho dashboard admin
 const db = require('../config/db');
 
 async function incrementViewCount() {

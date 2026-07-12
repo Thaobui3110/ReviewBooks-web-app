@@ -1,3 +1,4 @@
+// Rẽ nhánh: chưa đăng nhập → AuthStack, đã đăng nhập → MainTabs
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useAuth } from '../context/AuthContext';

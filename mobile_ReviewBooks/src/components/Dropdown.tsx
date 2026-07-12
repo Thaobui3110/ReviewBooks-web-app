@@ -1,3 +1,4 @@
+// Dropdown tự viết bằng Modal + FlatList, dùng cho lọc thể loại/sắp xếp
 import React, { useState } from 'react';
 import { View, Text, Pressable, Modal, FlatList, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { colors } from '../theme/colors';

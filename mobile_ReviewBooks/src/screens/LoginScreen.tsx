@@ -1,3 +1,4 @@
+// Trang đăng nhập
 import React, { useState } from 'react';
 import { Text, StyleSheet, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';

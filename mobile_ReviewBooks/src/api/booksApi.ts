@@ -1,3 +1,4 @@
+// Danh sách/chi tiết sách, bình luận (tạo/sửa/xoá)
 import { apiRequest } from './client';
 import { Book, Comment, Pagination, RatingStats } from '../types';
 

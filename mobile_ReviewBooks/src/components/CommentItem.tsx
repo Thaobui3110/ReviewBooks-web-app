@@ -1,3 +1,4 @@
+// 1 dòng bình luận, hiện nút sửa/xoá nếu là bình luận của chính mình
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { Comment } from '../types';

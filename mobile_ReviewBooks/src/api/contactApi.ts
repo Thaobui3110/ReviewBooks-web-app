@@ -1,3 +1,4 @@
+// Gửi ý kiến liên hệ
 import { apiRequest } from './client';
 import { ContactPayload } from '../types';
 

@@ -1,3 +1,4 @@
+// Hiển thị sao đánh giá (chỉ đọc), có thể ẩn số điểm bằng prop showValue
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';

@@ -1,3 +1,4 @@
+// Chặn open-redirect khi dùng tham số ?next=/?back=
 function safeNextUrl(value) {
   if (typeof value !== 'string') return '';
   const nextUrl = value.trim();

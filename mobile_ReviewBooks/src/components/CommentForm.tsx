@@ -1,3 +1,4 @@
+// Form gửi/sửa bình luận kèm chọn sao đánh giá
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import StarRatingInput from './StarRatingInput';

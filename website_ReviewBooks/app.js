@@ -1,3 +1,4 @@
+// Khởi tạo Express, gắn middleware và route theo đúng thứ tự
 require('dotenv').config();
 
 const path = require('path');

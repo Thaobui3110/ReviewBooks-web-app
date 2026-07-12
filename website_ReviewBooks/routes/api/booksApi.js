@@ -1,3 +1,4 @@
+// API danh sách/chi tiết sách và bình luận
 const express = require('express');
 const bookService = require('../../services/bookService');
 const commentService = require('../../services/commentService');

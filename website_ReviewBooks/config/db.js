@@ -1,3 +1,4 @@
+// Kết nối MySQL dùng chung cho toàn bộ services/
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({

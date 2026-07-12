@@ -1,3 +1,4 @@
+// Nghiệp vụ CRUD thể loại
 const db = require('../config/db');
 
 async function listNames() {

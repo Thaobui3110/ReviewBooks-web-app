@@ -1,3 +1,4 @@
+// Kiểu dữ liệu sách, tác giả, thể loại — khớp field API trả về
 export interface Tag {
   id: number;
   name: string;

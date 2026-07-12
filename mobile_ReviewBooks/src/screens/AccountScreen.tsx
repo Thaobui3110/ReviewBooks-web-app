@@ -1,3 +1,4 @@
+// Trang tài khoản: đổi tên hiển thị, đổi mật khẩu, đăng xuất
 import React, { useState } from 'react';
 import { Text, ScrollView, StyleSheet } from 'react-native';
 import { useAuth } from '../context/AuthContext';

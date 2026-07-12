@@ -1,3 +1,4 @@
+// Đăng ký, đăng nhập, đăng xuất, xem/sửa tài khoản, đổi mật khẩu
 import { apiRequest } from './client';
 import { LoginData, MeData, RegisterPayload, PasswordChangePayload } from '../types';
 

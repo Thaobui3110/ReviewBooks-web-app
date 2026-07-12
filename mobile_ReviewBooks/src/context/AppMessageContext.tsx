@@ -1,3 +1,4 @@
+// State cho banner thông báo thành công/lỗi toàn cục
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 
 type MessageType = 'success' | 'error';

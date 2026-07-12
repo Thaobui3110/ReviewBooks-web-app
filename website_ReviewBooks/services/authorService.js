@@ -1,3 +1,4 @@
+// Nghiệp vụ CRUD tác giả
 const db = require('../config/db');
 const { paginate } = require('../utils/pagination');
 

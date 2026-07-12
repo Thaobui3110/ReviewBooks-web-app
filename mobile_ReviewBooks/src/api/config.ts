@@ -1,3 +1,4 @@
+// Địa chỉ backend theo nền tảng — sửa NATIVE_HOST khi đổi môi trường test
 import { Platform } from 'react-native';
 
 const PORT = 3001;

@@ -1,3 +1,4 @@
+// Toàn bộ luật validate dữ liệu đầu vào của website
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clean(value) {

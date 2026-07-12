@@ -1,3 +1,4 @@
+// Vòng xoay loading toàn màn hình
 import React from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';

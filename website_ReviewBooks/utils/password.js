@@ -1,3 +1,4 @@
+// Hash và so khớp mật khẩu bằng PBKDF2-SHA512
 const crypto = require('crypto');
 
 function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {

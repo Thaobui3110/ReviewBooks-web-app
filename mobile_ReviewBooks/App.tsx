@@ -1,3 +1,4 @@
+// Điểm khởi động app: bọc các Context Provider rồi tới RootNavigator
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

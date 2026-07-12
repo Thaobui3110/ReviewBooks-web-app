@@ -1,3 +1,4 @@
+// Chân danh sách báo "đang tải thêm" hoặc "đã hết" khi cuộn vô hạn
 import React from 'react';
 import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';

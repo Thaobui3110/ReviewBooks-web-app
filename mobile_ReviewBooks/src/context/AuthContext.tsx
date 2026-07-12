@@ -1,3 +1,4 @@
+// Quản lý phiên đăng nhập: user, token, tự khôi phục phiên lúc mở app
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '../types';
 import * as authApi from '../api/authApi';

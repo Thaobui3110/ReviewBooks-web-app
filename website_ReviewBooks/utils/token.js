@@ -1,3 +1,4 @@
+// Ký và xác minh JWT dùng cho xác thực từ mobile app
 const jwt = require('jsonwebtoken');
 
 const SECRET = process.env.SESSION_SECRET;

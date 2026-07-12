@@ -1,3 +1,4 @@
+// Fetch wrapper trung tâm: gắn header Authorization, parse JSON, ném lỗi có message
 import { API_BASE_URL } from './config';
 import { ApiResponse } from '../types';
 

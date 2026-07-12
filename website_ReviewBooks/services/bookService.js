@@ -1,3 +1,4 @@
+// Nghiệp vụ CRUD sách: tìm kiếm, lọc, sắp xếp, phân trang, sách liên quan
 const db = require('../config/db');
 const { paginate } = require('../utils/pagination');
 

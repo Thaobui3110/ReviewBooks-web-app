@@ -1,3 +1,4 @@
+// Ô nhập liệu có nhãn, dùng chung cho mọi form
 import React from 'react';
 import { View, Text, TextInput, TextInputProps, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';

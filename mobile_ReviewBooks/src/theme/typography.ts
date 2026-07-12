@@ -1,3 +1,4 @@
+// Định nghĩa cỡ chữ dùng chung toàn app
 import { colors } from './colors';
 
 export const typography = {

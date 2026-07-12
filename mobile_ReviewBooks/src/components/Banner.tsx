@@ -1,3 +1,4 @@
+// Banner thông báo thành công/lỗi toàn cục, tự ẩn sau 3 giây
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useAppMessage } from '../context/AppMessageContext';

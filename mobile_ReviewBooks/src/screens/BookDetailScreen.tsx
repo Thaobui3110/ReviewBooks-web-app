@@ -1,3 +1,4 @@
+// Trang chi tiết sách: thông tin sách, danh sách bình luận, gửi/sửa/xoá đánh giá
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, Image, StyleSheet, useWindowDimensions } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
