@@ -4,16 +4,16 @@
   --color-bg: #f7f1e7;
   --color-bg-subtle: #f7f1e7;
   --color-surface: #fffdf8;
+  /* Không dùng trực tiếp trong CSS web, giữ làm màu gốc cho mobile (colors.surfaceWarm) */
   --color-surface-warm: #f8eddd;
   --color-border: #ded1bd;
-  --color-border-strong: #c6b496;
   --color-text: #1d211b;
   --color-text-soft: #3e4538;
   --color-text-muted: #66715f;
   --color-accent: #a65f2b;
   --color-accent-hover: #6f3a1f;
   --color-accent-soft: #ead1b5;
-  --color-sage: #8fa184;
+  /* Không dùng trực tiếp trong CSS web, giữ làm màu gốc cho mobile (colors.sageDark) */
   --color-sage-dark: #56664d;
   --color-star: #c98a2b;
   --color-star-empty: #e3d7c2;
